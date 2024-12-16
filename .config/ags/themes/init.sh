@@ -21,7 +21,7 @@ else
   echo "> Creating $LOCAL_STATE (Already Exists)"
 fi
 
-# Init Nord Wallpapers
+# Init Default Wallpapers
 if [[ ! -e "$LOCAL_STATE/wallpapers" && ! -e "$LOCAL_STATE/current_wallpaper" ]]; then
   ln -s "$WALLPAPERS_PATH/$DEFAULT_THEME" "$LOCAL_STATE/wallpapers"
   ln -s "$WALLPAPERS_PATH/$DEFAULT_THEME/default.png" "$LOCAL_STATE/current_wallpaper"
@@ -41,7 +41,7 @@ else
   echo "> Init Wallpapers (Already Exists)"
 fi
 
-# Init Nord Hypr Theme
+# Init Default Hypr Theme
 if [ ! -e "$LOCAL_STATE/hypr_theme.conf" ]; then
   ln -s "$HYPR_THEME/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/hypr_theme.conf"
 
@@ -50,7 +50,7 @@ else
   echo "> Init Hypr (Already Exists)"
 fi
 
-# Init Nord AGS Theme
+# Init Default AGS Theme
 if [ ! -e "$LOCAL_STATE/ags_theme.scss" ]; then
   ln -s "$AGS_PATH/themes/$DEFAULT_THEME.scss" "$LOCAL_STATE/ags_theme.scss"
 
@@ -59,7 +59,7 @@ else
   echo "> Init AGS (Already Exists)"
 fi
 
-# Init Nord AGS no_music image
+# Init Default AGS no_music image
 if [ ! -e "$LOCAL_STATE/no_music" ]; then
   ln -s "$AGS_PATH/assets/no_music/$DEFAULT_THEME.png" "$LOCAL_STATE/no_music"
 
@@ -68,7 +68,7 @@ else
   echo "> Init AGS no_music image (Already Exists)"
 fi
 
-# Init Nord Kitty Theme
+# Init Default Kitty Theme
 if [ ! -e "$LOCAL_STATE/kitty_theme.conf" ]; then
   ln -s "$KITTY_PATH/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/kitty_theme.conf"
   killall -USR1 kitty
@@ -78,7 +78,7 @@ else
   echo "> Init Kitty (Already Exists)"
 fi
 
-# Init Nord Neovim Theme
+# Init Default Neovim Theme
 if [ ! -e "$LOCAL_STATE/nvim_theme.lua" ]; then
   ln -s "$NVIM_PATH/lua/core/themes/$DEFAULT_THEME.lua" "$LOCAL_STATE/nvim_theme.lua"
   nvim \
