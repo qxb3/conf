@@ -56,11 +56,10 @@ function WeatherWin() {
               <label
                 className='time'
                 label={
-                  new Date(weather.current.time)
-                    .toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })
+                  weather.current.time.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })
                 }
                 xalign={1}
               />

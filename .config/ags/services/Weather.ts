@@ -53,7 +53,7 @@ export default class Weather extends GObject.Object {
 
       this.weather = {
         current: {
-          time: weather.current.time,
+          time: new Date(weather.current.time * 1000),
           temperature: weather.current.temperature_2m,
           humidity: weather.current.relative_humidity_2m,
           precipitation: weather.current.precipitation,
@@ -63,7 +63,7 @@ export default class Weather extends GObject.Object {
           icon: this._get_icon(weather.current.weather_code)
         },
         hourly: weather.hourly.time.map((time, i) => ({
-          time,
+          time: new Date(time * 1000),
           temperature: weather.hourly.temperature_2m[i],
           humidity: weather.hourly.relative_humidity_2m[i],
           weatherCode: weather.hourly.weather_code[i],
@@ -139,7 +139,7 @@ export default class Weather extends GObject.Object {
 
     this.weather = {
       current: {
-        time: Date.now(),
+        time: new Date(),
         temperature: 0,
         humidity: 0,
         precipitation: 0,
@@ -149,7 +149,7 @@ export default class Weather extends GObject.Object {
         icon: this._get_icon(WeatherCode.DEFAULT)
       },
       hourly: Array.from({ length: 24 }).map(() => ({
-        time: Date.now(),
+        time: new Date(),
         temperature: 1,
         humidity: 0,
         weatherCode: 0,
@@ -198,7 +198,7 @@ type LocationResponse = {
 
 export type WeatherData = {
   current: {
-    time: number
+    time: Date
     temperature: number
     humidity: number
     precipitation: number
@@ -208,7 +208,7 @@ export type WeatherData = {
     icon: string
   }
   hourly: {
-    time: number
+    time: Date
     temperature: number
     humidity: number
     readableWeather: string
