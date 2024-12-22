@@ -1,6 +1,6 @@
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 
-import { Calendar, FloatingWindow } from '@root/widgets'
+import { Calendar, FloatingWindow } from '@widgets'
 import { revealCalendar } from './vars'
 
 export default function(gdkmonitor: Gdk.Monitor) {

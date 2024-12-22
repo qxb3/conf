@@ -1,7 +1,7 @@
 import Weather from '@services/Weather'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 
-import { FloatingWindow } from '@root/widgets'
+import { FloatingWindow } from '@widgets'
 import { revealWeather } from './vars'
 import { bind } from 'astal'
 

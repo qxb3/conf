@@ -19,6 +19,9 @@ declare global {
   const TMP: string
 
   const USER_SETTINGS: UserSettings
+
+  // Debug
+  const DEBUG_WIDGET: (color: string) => string
 }
 
 Object.assign(globalThis, {
@@ -32,5 +35,9 @@ Object.assign(globalThis, {
     codeEditor: 'nvim',
     browser: 'firefox',
     animationSpeed: 300
+  },
+
+  DEBUG_WIDGET: (color: string) => {
+    return `background-color: ${color};`
   }
 })
