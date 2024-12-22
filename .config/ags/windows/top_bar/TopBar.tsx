@@ -4,7 +4,9 @@ import Battery from 'gi://AstalBattery'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { bind, Variable } from 'astal'
-import { revealCalendar } from '../calendar/vars'
+
+import { revealCalendar } from '@windows/calendar/vars'
+import { revealNotificationCenter } from '@windows/notification_center/vars'
 
 const hyprland = Hyprland.get_default()
 const network = Network.get_default()
@@ -94,8 +96,20 @@ function Right() {
       </button>
 
       <button
-        className='bell'
-        cursor='pointer'>
+        className={
+          revealNotificationCenter()
+            .as(revealed =>
+              revealed
+                ? 'bell active'
+                : 'bell'
+            )
+        }
+        cursor='pointer'
+        onClick={() => {
+          revealNotificationCenter.set(
+            !revealNotificationCenter.get()
+          )
+        }}>
         <icon
           icon='custom-bell-symbolic'
         />

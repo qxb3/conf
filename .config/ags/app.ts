@@ -3,8 +3,11 @@ import './globals'
 import { App } from 'astal/gtk3'
 import { compileScss } from './cssHotReload'
 
-import TopBar from '@windows/top_bar/TopBar'
 import SideBar from '@windows/side_bar/SideBar'
+import TopBar from '@windows/top_bar/TopBar'
+
+import NotificationCenter from '@windows/notification_center/NotificationCenter'
+
 import AppLauncher from '@windows/app_launcher/AppLauncher'
 import Calendar from '@windows/calendar/Calendar'
 import Wallpapers from '@windows/wallpapers/Wallpapers'
@@ -24,6 +27,10 @@ App.start({
     SideBar(mainMonitor)
     TopBar(mainMonitor)
 
+    // TopBar Floating Windows
+    NotificationCenter(mainMonitor)
+
+    // SideBar Floating Windows
     AppLauncher(mainMonitor)
     Calendar(mainMonitor)
     Wallpapers(mainMonitor)

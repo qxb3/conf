@@ -8,15 +8,6 @@ $fg:        #C9C6BC;
 $fg1:       #bbb7aa;
 $fg2:       #a49f8e;
 
-$red:       #cc241d;
-$green:     #98971a;
-$yellow:    #d79921;
-$orange:    #d65d0e;
-$blue:      #458588;
-$purple:    #b16286;
-$aqua:      #689d6a;
-$gray:      #928374;
-
 $primary: $fg;
 $secondary: $fg2;
 $border: $fg;
@@ -32,8 +23,13 @@ $border: $fg;
 @import "./widgets/calendar/calendar.scss";
 
 // Windows
-@import "./windows/top_bar/styles.scss";
 @import "./windows/side_bar/styles.scss";
+@import "./windows/top_bar/styles.scss";
+
+// TopBar Floating Windows
+@import "./windows/notification_center/styles.scss";
+
+// SideBar Floating Windows
 @import "./windows/app_launcher/styles.scss";
 @import "./windows/calendar/calendar.scss";
 @import "./windows/wallpapers/styles.scss";
