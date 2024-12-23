@@ -3,83 +3,12 @@ import Notifyd from 'gi://AstalNotifd'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { timeout, Variable } from 'astal'
 
-import { FloatingWindow } from '@widgets'
+import { FloatingWindow, Notification } from '@widgets'
 import { revealNotificationCenter } from './vars'
 
 const notifyd = Notifyd.get_default()
 
-function Notification(props: {
-  notification: Notifyd.Notification,
-  reveal: boolean
-}) {
-  const {
-    notification,
-    reveal = false
-  } = props
-
-  const downRevealer = Variable(true)
-  const sideRevealer = Variable(reveal)
-
-  return (
-    <box
-      hexpand={true}
-      vertical={true}
-      halign={Gtk.Align.END}>
-      <revealer
-        revealChild={downRevealer()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-        transitionDuration={USER_SETTINGS.animationSpeed}
-        onDestroy={() => downRevealer.drop()}>
-        <box hexpand={true}>
-          <revealer
-            revealChild={sideRevealer()}
-            transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-            transitionDuration={USER_SETTINGS.animationSpeed}
-            setup={() => {
-              timeout(1, () => {
-                sideRevealer.set(true)
-              })
-            }}
-            onDestroy={() => sideRevealer.drop()}>
-            <box
-              className='notification'
-              vertical={true}
-              spacing={8}
-              hexpand={true}>
-              <label
-                className='app_name'
-                label={notification.get_app_name()}
-                maxWidthChars={8}
-                lines={3}
-                xalign={0}
-              />
-
-              <box
-                vertical={true}
-                spacing={4}>
-                <label
-                  className='summary'
-                  label={notification.get_summary()}
-                  maxWidthChars={8}
-                  truncate={true}
-                  xalign={0}
-                />
-
-                <label
-                  className='body'
-                  label={notification.get_body()}
-                  maxWidthChars={8}
-                  truncate={true}
-                  xalign={0}
-                />
-              </box>
-            </box>
-          </revealer>
-        </box>
-      </revealer>
-    </box>
-  )
-}
+  const notificationSize = Variable(0)
 
 function Header() {
   return (
@@ -103,7 +32,11 @@ function Header() {
         cursor='pointer'
         onClick={() => {
           notifyd.get_notifications()
-            .map(n => n.dismiss())
+            .map((n, i) => {
+              timeout((USER_SETTINGS.animationSpeed * i) / 3, () => {
+                n.dismiss()
+              })
+            })
         }}>
         <icon
           className='icon'
@@ -116,40 +49,78 @@ function Header() {
 
 function NotificationList() {
   return (
+    <scrollable vexpand={true}>
+      <box
+        className='notifications'
+        spacing={16}
+        vertical={true}
+        hexpand={true}
+        setup={(self) => {
+          const notifications = new Map<number, Gtk.Widget>()
+
+          function onAdded(id: number) {
+            const notification = notifyd.get_notification(id)
+            if (!notification)
+              return
+
+            const replace = notifications.get(id)
+            if (replace)
+              replace.destroy()
+
+            const notificationWidget = Notification({ notification, reveal: !!replace })
+            notifications.set(id, notificationWidget)
+            notificationSize.set(notifications.size)
+
+            self.pack_start(notificationWidget, false, false, 0)
+          }
+
+          function onRemove(id: number) {
+            if (!notifications.has(id))
+              return
+
+            notifications.delete(id)
+            notificationSize.set(notifications.size)
+          }
+
+          self.hook(notifyd, 'notified', (_, id) => onAdded(id))
+          self.hook(notifyd, 'resolved', (_, id) => onRemove(id))
+
+          notifyd
+            .get_notifications()
+            .map((notification, i) => {
+              timeout((USER_SETTINGS.animationSpeed * i) / 3, () => {
+                onAdded(notification.get_id())
+              })
+            })
+        }}
+      />
+    </scrollable>
+  )
+}
+
+function NoNotification() {
+  return (
     <box
-      className='notifications'
-      spacing={16}
-      vertical={true}
+      className='no_notification'
+      visible={
+        notificationSize()
+          .as(size => size <= 0)
+      }
+      valign={Gtk.Align.CENTER}
       hexpand={true}
-      setup={(self) => {
-        const notifications = new Map<number, Gtk.Widget>()
+      vexpand={true}
+      vertical={true}
+      spacing={12}>
+      <icon
+        className='icon'
+        icon='custom-slash-bell-symbolic'
+      />
 
-        function onAdded(id: number) {
-          const notification = notifyd.get_notification(id)
-          if (!notification)
-            return
-
-          const replace = notifications.get(id)
-          if (replace)
-            replace.destroy()
-
-          const notificationWidget = Notification({ notification, reveal: !!replace })
-          notifications.set(id, notificationWidget)
-
-          self.pack_end(notificationWidget, false, false, 0)
-        }
-
-        function onRemove(id: number) {
-          if (notifications.has(id))
-            return
-
-          // notifications.get(id)!.remove()
-          notifications.delete(id)
-        }
-
-        notifyd.get_notifications().map(notification => onAdded(notification.get_id()))
-        self.hook(notifyd, 'notified', (_, id) => onAdded(id))
-      }}>
+      <label
+        className='title'
+        label='No Notification'
+        hexpand={true}
+      />
     </box>
   )
 }
@@ -158,9 +129,11 @@ function NotificationCenter() {
   return (
     <box
       className='content'
-      vertical={true}
-      spacing={8}>
+      vertical={true}>
       <Header />
+      <Gtk.Separator visible />
+
+      <NoNotification />
       <NotificationList />
     </box>
   )

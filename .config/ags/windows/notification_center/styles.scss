@@ -3,10 +3,15 @@
   min-height: 400px;
 
   & .content {
-    padding: 1rem;
-
     & .header {
+      padding: 1rem;
+
       & .icon { font-size: 24px; }
+      & .clear {
+        & .icon {
+          font-size: 18px;
+        }
+      }
 
       & .title {
         font-size: 18px;
@@ -15,9 +20,18 @@
     }
 
     & .notifications {
-      & .notification {
-        border: solid $bg 1px;
-        padding: 0.5rem;
+      padding: 1rem;
+    }
+
+    & .no_notification {
+      & .icon {
+        font-size: 64px;
+        color: $bg2;
+      }
+
+      & .title {
+        font-size: 24px;
+        color: $bg2;
       }
     }
   }
