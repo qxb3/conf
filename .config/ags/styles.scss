@@ -18,9 +18,14 @@ $border: $fg;
   color: $fg;
 }
 
+separator {
+  background-color: $bg;
+}
+
 // Widgets
 @import "./widgets/floating_window/floating_window.scss";
 @import "./widgets/calendar/calendar.scss";
+@import "./widgets/notification/styles.scss";
 
 // Windows
 @import "./windows/side_bar/styles.scss";
