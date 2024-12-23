@@ -10,7 +10,7 @@ const weather = Weather.get_default()
 function WeatherWin() {
   return (
     <box className='content'>
-      {bind(weather, 'weather').as(weather => (
+      {bind(weather, 'weather').as(weatherData => (
         <box
           vertical={true}
           spacing={8}>
@@ -20,14 +20,14 @@ function WeatherWin() {
             <box spacing={8}>
               <icon
                 className='weather_icon'
-                icon={weather.current.icon}
+                icon={weatherData.current.icon}
                 valign={Gtk.Align.CENTER}
               />
 
               <box className='temp_container'>
                 <label
                   className='temp'
-                  label={`${Math.round(weather.current.temperature)}`}
+                  label={`${Math.round(weatherData.current.temperature)}`}
                   valign={Gtk.Align.CENTER}
                 />
 
@@ -49,14 +49,17 @@ function WeatherWin() {
               halign={Gtk.Align.END}
               vertical={true}>
               <label
-                className='title'
-                label='Weather'
+                className='city'
+                label={
+                  bind(weather, 'location')
+                    .as(location => location.city)
+                }
               />
 
               <label
                 className='time'
                 label={
-                  weather.current.time.toLocaleTimeString([], {
+                  weatherData.current.time.toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit'
                   })
@@ -66,7 +69,7 @@ function WeatherWin() {
 
               <label
                 className='readable_weather'
-                label={weather.current.readableWeather}
+                label={weatherData.current.readableWeather}
                 xalign={1}
               />
             </box>
@@ -77,30 +80,30 @@ function WeatherWin() {
             vertical={true}>
             <label
               className='precitipation'
-              label={`Precipitation: ${Math.round(weather.current.precipitation)}%`}
+              label={`Precipitation: ${Math.round(weatherData.current.precipitation)}%`}
               xalign={0}
             />
 
             <label
               className='humidity'
-              label={`Humidity: ${Math.round(weather.current.humidity)}%`}
+              label={`Humidity: ${Math.round(weatherData.current.humidity)}%`}
               xalign={0}
             />
 
             <label
               className='wind_speed'
-              label={`Wind: ${Math.round(weather.current.windSpeed)} km/h`}
+              label={`Wind: ${Math.round(weatherData.current.windSpeed)} km/h`}
               xalign={0}
             />
           </box>
 
           <box
             className='graph'
-            css={`min-height: ${Math.max(...weather.hourly.map(w => (w.temperature / 100) * 250))}`}
+            css={`min-height: ${Math.max(...weatherData.hourly.map(w => (w.temperature / 100) * 250))}`}
             valign={Gtk.Align.END}
             homogeneous={true}
             spacing={4}>
-            {weather.hourly.map(hourly => (
+            {weatherData.hourly.map(hourly => (
               <box
                 vertical={true}
                 valign={Gtk.Align.END}>
