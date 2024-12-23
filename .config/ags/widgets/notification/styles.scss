@@ -1,0 +1,34 @@
+.widget_notification {
+  min-width: calc(300px - 3 * 1rem);
+  border: solid $bg 1px;
+  padding: 0.5rem;
+
+  & .notif_header {
+    & .app_name {
+      font-weight: 700;
+    }
+
+    & .time {
+      font-weight: 700;
+      color: $bg2;
+    }
+
+    & .close {
+      & .icon {
+        font-size: 16px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  & .content {
+    margin-bottom: 2rem;
+  }
+
+  & .actions {
+    & .action {
+      padding: 0.5rem;
+      border: solid $bg 1px;
+    }
+  }
+}
