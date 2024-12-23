@@ -21,11 +21,9 @@
     }
   }
 
-  & .content {
-    margin-bottom: 2rem;
-  }
-
   & .actions {
+    margin-top: 1rem;
+
     & .action {
       padding: 0.5rem;
       border: solid $bg 1px;

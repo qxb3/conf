@@ -3,6 +3,7 @@ import Pango from 'gi://Pango'
 
 import { Gtk } from 'astal/gtk3'
 import { GLib, timeout, Variable } from 'astal'
+import { fileExists } from '@utils/etc'
 
 const notifyd = Notifyd.get_default()
 
@@ -57,30 +58,32 @@ function NotifContent(props: { notification: Notifyd.Notification }) {
 
   return (
     <box className='content'>
-      <box
-        vertical={true}
-        spacing={4}>
-        <label
-          className='summary'
-          label={notification.get_summary()}
-          maxWidthChars={16}
-          truncate={true}
-          xalign={0}
-        />
+      <box spacing={8}>
+        <box
+          vertical={true}
+          spacing={4}>
+          <label
+            className='summary'
+            label={`• ${notification.get_summary()}`}
+            maxWidthChars={32}
+            truncate={true}
+            xalign={0}
+          />
 
-        <label
-          className='body'
-          label={
-            notification.get_body()
-            .replace(/(\r\n|\n|\r)/gm, ' ')
-          }
-          maxWidthChars={32}
-          wrapMode={Pango.WrapMode.WORD_CHAR}
-          wrap={true}
-          truncate={true}
-          lines={3}
-          xalign={0}
-        />
+          <label
+            className='body'
+            label={
+              notification.get_body()
+                .replace(/(\r\n|\n|\r)/gm, ' ')
+            }
+            maxWidthChars={32}
+            wrapMode={Pango.WrapMode.WORD_CHAR}
+            wrap={true}
+            truncate={true}
+            lines={3}
+            xalign={0}
+          />
+        </box>
       </box>
     </box>
   )
@@ -184,7 +187,8 @@ export default function Notification(props: {
       timeout(USER_SETTINGS.animationSpeed, () => {
         downRevealer.set(false)
         timeout(USER_SETTINGS.animationSpeed, () => {
-          notificationWidget.destroy()
+          if (!notificationWidget.destroyed(notificationWidget))
+            notificationWidget.destroy()
         })
       })
     }
