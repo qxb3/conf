@@ -41,13 +41,15 @@ function Wallpapers() {
 }
 
 export default function(gdkmonitor: Gdk.Monitor) {
-  <FloatingWindow
-    className='wallpapers'
-    title='Wallpapers'
-    gdkmonitor={gdkmonitor}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
-    revealer={revealWallpapers}
-    transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}>
-    <Wallpapers />
-  </FloatingWindow>
+  return (
+    <FloatingWindow
+      className='wallpapers'
+      title='Wallpapers'
+      gdkmonitor={gdkmonitor}
+      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
+      revealer={revealWallpapers}
+      transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}>
+      <Wallpapers />
+    </FloatingWindow>
+  )
 }

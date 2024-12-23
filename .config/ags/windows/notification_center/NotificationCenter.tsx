@@ -140,13 +140,15 @@ function NotificationCenter() {
 }
 
 export default function(gdkmonitor: Gdk.Monitor) {
-  <FloatingWindow
-    className='notification_center'
-    title='Notifications'
-    gdkmonitor={gdkmonitor}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
-    revealer={revealNotificationCenter}
-    transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
-    <NotificationCenter />
-  </FloatingWindow>
+  return (
+    <FloatingWindow
+      className='notification_center'
+      title='Notifications'
+      gdkmonitor={gdkmonitor}
+      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.RIGHT}
+      revealer={revealNotificationCenter}
+      transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
+      <NotificationCenter />
+    </FloatingWindow>
+  )
 }

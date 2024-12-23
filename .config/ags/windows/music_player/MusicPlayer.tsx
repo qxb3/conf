@@ -186,13 +186,15 @@ function MusicPlayer() {
 }
 
 export default function(gdkmonitor: Gdk.Monitor) {
-  <FloatingWindow
-    className='music_player'
-    title='Spotify'
-    gdkmonitor={gdkmonitor}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
-    revealer={revealMusicPlayer}
-    transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}>
-    <MusicPlayer />
-  </FloatingWindow>
+  return (
+    <FloatingWindow
+      className='music_player'
+      title='Spotify'
+      gdkmonitor={gdkmonitor}
+      anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
+      revealer={revealMusicPlayer}
+      transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}>
+      <MusicPlayer />
+    </FloatingWindow>
+  )
 }
