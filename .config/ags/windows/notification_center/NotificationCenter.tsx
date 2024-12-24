@@ -8,7 +8,7 @@ import { revealNotificationCenter } from './vars'
 
 const notifyd = Notifyd.get_default()
 
-  const notificationSize = Variable(0)
+const notificationSize = Variable(0)
 
 function Header() {
   return (
