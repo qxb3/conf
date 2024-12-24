@@ -2,6 +2,8 @@ import Notifyd from 'gi://AstalNotifd'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 
 import { Notification } from '@widgets'
+import { revealNotificationCenter } from '@windows/notification_center/vars'
+import { revealCalendar } from '@windows/calendar/vars'
 
 const notifyd = Notifyd.get_default()
 
@@ -27,6 +29,9 @@ function NotifPopupList() {
             onHoverLost: (remove) => onRemove(id, remove),
             onPopupTimeoutDone: (remove) => onRemove(id, remove)
           })
+
+          revealNotificationCenter.set(false)
+          revealCalendar.set(false)
 
           popups.set(id, notificationWidget)
           self.pack_start(notificationWidget, false, false, 0)
