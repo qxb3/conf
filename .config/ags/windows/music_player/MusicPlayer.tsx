@@ -127,7 +127,7 @@ function Position() {
           className='progress'
           fraction={
             bind(spotify, 'position')
-            .as(position => position / length)
+              .as(position => position / length)
           }
           valign={Gtk.Align.CENTER}
           hexpand={true}
@@ -140,11 +140,11 @@ function Position() {
             className='current_progress'
             label={
               bind(spotify, 'position')
-              .as(position =>
-                !isAvailable || position <= 0
-                  ? '0:00'
-                  : `${Math.floor(position / 60)}:${String(Math.round(position) % 60).padStart(2, '0')}`
-              )
+                .as(position =>
+                  !isAvailable || position <= 0
+                    ? '0:00'
+                    : `${Math.floor(position / 60)}:${String(Math.round(position) % 60).padStart(2, '0')}`
+                )
             }
           />
 
