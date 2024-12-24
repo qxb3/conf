@@ -36,7 +36,7 @@ Object.assign(globalThis, {
     codeEditor: 'nvim',
     browser: 'firefox',
     animationSpeed: 300,
-    notifPopupTimeout: 3000
+    notifPopupTimeout: 5000
   },
 
   DEBUG_WIDGET: (color: string) => {
