@@ -3,12 +3,15 @@ import Pango from 'gi://Pango'
 
 import { Gtk } from 'astal/gtk3'
 import { GLib, timeout, Variable } from 'astal'
-import { fileExists } from '@utils/etc'
+import { notifUrgency } from '@utils/etc'
 
 const notifyd = Notifyd.get_default()
 
-function NotifHeader(props: { notification: Notifyd.Notification }) {
-  const { notification } = props
+function NotifHeader(props: {
+  notification: Notifyd.Notification,
+  popup: boolean
+}) {
+  const { notification, popup } = props
 
   return (
     <box
@@ -28,27 +31,29 @@ function NotifHeader(props: { notification: Notifyd.Notification }) {
         className='time'
         label={
           GLib.DateTime
-          .new_from_unix_local(notification.get_time())
-          .format('• %I:%M %p')!
+            .new_from_unix_local(notification.get_time())
+            .format('• %I:%M %p')!
         }
         xalign={0}
         yalign={1}
       />
 
-      <button
-        className='close'
-        cursor='pointer'
-        halign={Gtk.Align.END}
-        valign={Gtk.Align.CENTER}
-        hexpand={true}
-        onClick={() => {
-          notification.dismiss()
-        }}>
-        <icon
-          className='icon'
-          icon='window-close-symbolic'
-        />
-      </button>
+      {!popup && (
+        <button
+          className='close'
+          cursor='pointer'
+          halign={Gtk.Align.END}
+          valign={Gtk.Align.CENTER}
+          hexpand={true}
+          onClick={() => {
+            notification.dismiss()
+          }}>
+          <icon
+            className='icon'
+            icon='window-close-symbolic'
+          />
+        </button>
+      )}
     </box>
   )
 }
@@ -121,77 +126,123 @@ function NotifActions(props: { notification: Notifyd.Notification }) {
   )
 }
 
-function NotificationWidget(props: { notification: Notifyd.Notification }) {
-  const { notification } = props
+function NotificationWidget(props: {
+  notification: Notifyd.Notification
+  popup: boolean
+}) {
+  const { notification, popup } = props
 
   return (
-    <box
-      className='widget_notification'
-      vertical={true}
-      spacing={8}>
-      <NotifHeader notification={notification} />
-      <Gtk.Separator visible />
-      <NotifContent notification={notification} />
-      {notification.get_actions().length > 0 && <NotifActions notification={notification} />}
+    <box className={`widget_notification ${popup ? 'popup': ''}`}>
+      {popup && (
+        <box
+          className={`urgency ${notifUrgency(notification)}`}
+          vexpand={true}
+        />
+      )}
+
+      <box
+        vertical={true}
+        hexpand={true}
+        spacing={8}>
+        <NotifHeader
+          notification={notification}
+          popup={popup}
+        />
+
+        <Gtk.Separator visible />
+
+        <NotifContent notification={notification} />
+
+        {notification.get_actions().length > 0
+          && <NotifActions notification={notification} />}
+      </box>
     </box>
   )
 }
 
 export default function Notification(props: {
-  notification: Notifyd.Notification,
-  reveal: boolean
+  notification: Notifyd.Notification
+  reveal?: boolean
+  popup?: boolean
+  onClick?: (remove: () => void) => void
+  onHoverLost?: (remove: () => void) => void
+  onPopupTimeoutDone?: (remove: () => void) => void
 }) {
   const {
     notification,
-    reveal = false
+    reveal = false,
+    popup = false,
+    onClick,
+    onHoverLost,
+    onPopupTimeoutDone
   } = props
 
   const downRevealer = Variable(reveal)
   const sideRevealer = Variable(reveal)
 
+  function remove() {
+    sideRevealer.set(false)
+
+    timeout(USER_SETTINGS.animationSpeed, () => {
+      downRevealer.set(false)
+      timeout(USER_SETTINGS.animationSpeed, () => {
+        if (!notificationWidget.destroyed(notificationWidget))
+          notificationWidget.destroy()
+      })
+    })
+  }
+
+  if (popup) {
+    timeout(USER_SETTINGS.notifPopupTimeout, () => {
+      onPopupTimeoutDone?.(remove)
+    })
+  }
+
   const notificationWidget = (
-    <box vertical={true}>
-      <revealer
-        revealChild={downRevealer()}
-        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
-        transitionDuration={USER_SETTINGS.animationSpeed}
-        onDestroy={() => downRevealer.drop()}
-        onRealize={() => {
-          timeout(1, () => {
-            downRevealer.set(true);
-          })
-        }}>
-        <box halign={Gtk.Align.END}>
-          <revealer
-            revealChild={sideRevealer()}
-            transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
-            transitionDuration={USER_SETTINGS.animationSpeed}
-            onRealize={() => {
-              timeout(USER_SETTINGS.animationSpeed, () => {
-                sideRevealer.set(true)
-              })
-            }}
-            onDestroy={() => sideRevealer.drop()}>
-            <NotificationWidget notification={notification} />
-          </revealer>
-        </box>
-      </revealer>
-    </box>
+    <eventbox
+      cursor={popup ? 'pointer' : ''}
+      onClick={() => onClick?.(remove)}
+      onHoverLost={() => onHoverLost?.(remove)}>
+      <box vertical={true}>
+        <revealer
+          revealChild={downRevealer()}
+          transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
+          transitionDuration={USER_SETTINGS.animationSpeed}
+          onDestroy={() => downRevealer.drop()}
+          onRealize={() => {
+            timeout(1, () => {
+              downRevealer.set(true)
+            })
+          }}>
+          <box halign={Gtk.Align.END}>
+            <revealer
+              revealChild={sideRevealer()}
+              transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
+              transitionDuration={USER_SETTINGS.animationSpeed}
+              onRealize={() => {
+                timeout(USER_SETTINGS.animationSpeed, () => {
+                  sideRevealer.set(true)
+                })
+              }}
+              onDestroy={() => sideRevealer.drop()}>
+              <NotificationWidget
+                notification={notification}
+                popup={popup}
+              />
+            </revealer>
+          </box>
+        </revealer>
+      </box>
+    </eventbox>
   )
 
   const resolvedHandler = notifyd.connect('resolved', (_, id) => {
-    if(id == notification.id) {
-      notifyd.disconnect(resolvedHandler)
-      sideRevealer.set(false)
+    if (id !== notification.get_id() && !popup)
+      return
 
-      timeout(USER_SETTINGS.animationSpeed, () => {
-        downRevealer.set(false)
-        timeout(USER_SETTINGS.animationSpeed, () => {
-          if (!notificationWidget.destroyed(notificationWidget))
-            notificationWidget.destroy()
-        })
-      })
-    }
+    notifyd.disconnect(resolvedHandler)
+    remove()
   })
 
   return notificationWidget

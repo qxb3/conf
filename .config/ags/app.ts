@@ -6,6 +6,7 @@ import { compileScss } from './cssHotReload'
 import SideBar from '@windows/side_bar/SideBar'
 import TopBar from '@windows/top_bar/TopBar'
 
+import NotificationPopups from '@windows/notification_popups/NotificationPopups'
 import NotificationCenter from '@windows/notification_center/NotificationCenter'
 
 import AppLauncher from '@windows/app_launcher/AppLauncher'
@@ -28,6 +29,7 @@ App.start({
     TopBar(mainMonitor)
 
     // TopBar Floating Windows
+    NotificationPopups(mainMonitor)
     NotificationCenter(mainMonitor)
 
     // SideBar Floating Windows

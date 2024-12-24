@@ -18,9 +18,7 @@ $border: $fg;
   color: $fg;
 }
 
-separator {
-  background-color: $bg;
-}
+separator { background-color: $bg; }
 
 // Widgets
 @import "./widgets/floating_window/floating_window.scss";
@@ -32,6 +30,7 @@ separator {
 @import "./windows/top_bar/styles.scss";
 
 // TopBar Floating Windows
+@import "./windows/notification_popups/styles.scss";
 @import "./windows/notification_center/styles.scss";
 
 // SideBar Floating Windows

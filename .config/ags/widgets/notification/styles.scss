@@ -1,9 +1,13 @@
 .widget_notification {
-  min-width: calc(300px - 3 * 1rem);
+  min-width: calc(300px - 2 * 1rem);
   border: solid $bg 1px;
-  padding: 0.5rem;
+
+  & * { font-family: 'Iosevka Nerd Font Mono'; }
+  & separator { background-color: $bg; }
 
   & .notif_header {
+    padding: 0.5rem 0.5rem 0 0.5rem;
+
     & .app_name {
       font-weight: 700;
     }
@@ -21,12 +25,51 @@
     }
   }
 
+  & .content {
+    padding: 0 0.5rem 0.5rem 0.5rem;
+  }
+
   & .actions {
     margin-top: 1rem;
+    padding-bottom: 0.5rem;
 
     & .action {
       padding: 0.5rem;
       border: solid $bg 1px;
+    }
+
+    & .action:first-child { margin-left: 0.5rem; }
+    & .action:last-child { margin-right: 0.5rem; }
+  }
+
+  &.popup {
+    min-width: calc(300px - 2 * 1rem);
+    background-color: $bg;
+    box-shadow:
+      -4px 0 4px rgba(42, 42, 42, 0.3),
+      4px 0  4px rgba(42, 42, 42, 0.3),
+      0 4px  4px rgba(42, 42, 42, 0.3);
+
+    & separator { background-color: $fg; }
+
+    & .urgency {
+      min-width: 20px;
+
+      &.low,
+      &.normal { background-color: $fg; }
+      &.critical { background-color: #ff0000; }
+    }
+
+    & .notif_header {
+      & .time { color: $bg2; }
+    }
+
+    & .actions {
+      padding-bottom: 0.5rem;
+
+      & .action { border: solid $fg 1px; }
+      & .action:first-child { margin-left: 0.5rem; }
+      & .action:last-child { margin-right: 0.5rem; }
     }
   }
 }

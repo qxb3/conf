@@ -9,7 +9,8 @@ export interface UserSettings {
   terminal: string
   codeEditor: string
   browser: string
-  animationSpeed: number
+  animationSpeed: number,
+  notifPopupTimeout: number
 }
 
 declare global {
@@ -34,7 +35,8 @@ Object.assign(globalThis, {
     terminal: 'kitty',
     codeEditor: 'nvim',
     browser: 'firefox',
-    animationSpeed: 300
+    animationSpeed: 300,
+    notifPopupTimeout: 3000
   },
 
   DEBUG_WIDGET: (color: string) => {
