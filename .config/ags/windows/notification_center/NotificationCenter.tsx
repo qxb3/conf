@@ -102,15 +102,24 @@ function NoNotification() {
   return (
     <box
       className='no_notification'
-      visible={
-        notificationSize()
-          .as(size => size <= 0)
-      }
+      visible={notificationSize.get() <= 0}
       valign={Gtk.Align.CENTER}
       hexpand={true}
       vexpand={true}
       vertical={true}
-      spacing={12}>
+      spacing={12}
+      setup={(self) => {
+        self.hook(notificationSize, () => {
+          if (notificationSize.get() > 0)
+            self.visible = false
+
+          if (notificationSize.get() <= 0) {
+            timeout(USER_SETTINGS.animationSpeed, () => {
+              self.visible = true
+            })
+          }
+        })
+      }}>
       <icon
         className='icon'
         icon='custom-slash-bell-symbolic'
