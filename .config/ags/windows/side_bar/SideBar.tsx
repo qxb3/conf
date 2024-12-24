@@ -143,6 +143,19 @@ function SideBar() {
         </button>
 
         <button
+          className='color_picker'
+          cursor='pointer'
+          onClick={() => {
+            execAsync(`${HOME_DIR}/.config/hypr/scripts/color-picker.sh`)
+          }}>
+          <box vertical={true}>
+            <icon icon='custom-color-picker-symbolic' />
+            <label label='Picker' />
+          </box>
+        </button>
+
+
+        <button
           className='controls'
           cursor='pointer'>
           <box vertical={true}>
