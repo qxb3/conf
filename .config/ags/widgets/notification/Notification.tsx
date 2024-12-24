@@ -4,6 +4,7 @@ import Pango from 'gi://Pango'
 import { Gtk } from 'astal/gtk3'
 import { GLib, timeout, Variable } from 'astal'
 import { notifUrgency } from '@utils/etc'
+import ProgressBar from '@widgets/ProgressBar'
 
 const notifyd = Notifyd.get_default()
 
@@ -132,8 +133,17 @@ function NotificationWidget(props: {
 }) {
   const { notification, popup } = props
 
+  let popupTimeout: Variable<number> | undefined
+
+  if (popup) {
+    popupTimeout = Variable(0)
+      .poll(50, (time) => Math.min(time + 0.01, 1.0))
+  }
+
   return (
-    <box className={`widget_notification ${popup ? 'popup': ''}`}>
+    <box
+      className={`widget_notification ${popup ? 'popup': ''}`}
+      onDestroy={() => popupTimeout?.drop()}>
       {popup && (
         <box
           className={`urgency ${notifUrgency(notification)}`}
@@ -141,21 +151,35 @@ function NotificationWidget(props: {
         />
       )}
 
-      <box
-        vertical={true}
-        hexpand={true}
-        spacing={8}>
-        <NotifHeader
-          notification={notification}
-          popup={popup}
-        />
+      <box vertical={true}>
+        <box
+          vertical={true}
+          hexpand={true}
+          spacing={8}>
+          <NotifHeader
+            notification={notification}
+            popup={popup}
+          />
 
-        <Gtk.Separator visible />
+          <Gtk.Separator visible />
 
-        <NotifContent notification={notification} />
+          <NotifContent notification={notification} />
 
-        {notification.get_actions().length > 0
-          && <NotifActions notification={notification} />}
+          {notification.get_actions().length > 0
+            && <NotifActions notification={notification} />}
+        </box>
+
+        {popup && (
+          <box
+            className='popup_timeout'>
+            <ProgressBar
+              className='progress'
+              fraction={popupTimeout?.()}
+              valign={Gtk.Align.CENTER}
+              hexpand={true}
+            />
+          </box>
+        )}
       </box>
     </box>
   )

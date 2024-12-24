@@ -64,6 +64,19 @@
       & .time { color: $bg2; }
     }
 
+    & .popup_timeout {
+      & .progress {
+        & trough {
+          min-height: 2px;
+
+          & progress {
+            background-color: $fg;
+            min-height: 2px;
+          }
+        }
+      }
+    }
+
     & .actions {
       padding-bottom: 0.5rem;
 
