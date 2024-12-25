@@ -136,8 +136,11 @@ function NotificationWidget(props: {
   let popupTimeout: Variable<number> | undefined
 
   if (popup) {
+    const rate = 50
+    const speed = rate / (USER_SETTINGS.notifPopupTimeout - USER_SETTINGS.animationSpeed)
+
     popupTimeout = Variable(0)
-      .poll(50, (time) => Math.min(time + 0.01, 1.0))
+      .poll(rate, (time) => Math.min(time + speed, 1.0))
   }
 
   return (
