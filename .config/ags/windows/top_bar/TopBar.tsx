@@ -7,6 +7,7 @@ import { bind, Variable } from 'astal'
 
 import { revealCalendar } from '@windows/calendar/vars'
 import { revealNotificationCenter } from '@windows/notification_center/vars'
+import { revealBattery } from '@windows/battery/vars'
 
 const hyprland = Hyprland.get_default()
 const network = Network.get_default()
@@ -87,9 +88,21 @@ function Right() {
       })}
 
       <button
-        className='battery'
+        className={
+          revealBattery()
+            .as(revealed =>
+              revealed
+                ? 'battery_btn active'
+                : 'battery_btn'
+            )
+        }
         cursor='pointer'
-        visible={bind(battery, 'isPresent')}>
+        visible={bind(battery, 'isPresent')}
+        onClick={() => {
+          revealBattery.set(
+            !revealBattery.get()
+          )
+        }}>
         <icon
           icon={bind(battery, 'iconName')}
         />

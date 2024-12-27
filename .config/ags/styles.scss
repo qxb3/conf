@@ -26,6 +26,7 @@ separator { background-color: $bg; }
 @import "./widgets/notification/styles.scss";
 
 // Windows
+@import "./windows/battery/styles.scss";
 @import "./windows/side_bar/styles.scss";
 @import "./windows/top_bar/styles.scss";
 

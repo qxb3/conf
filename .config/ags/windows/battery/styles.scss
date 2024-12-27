@@ -1,0 +1,27 @@
+.battery {
+  min-width: 300px;
+
+  & .content {
+    padding: 1rem;
+
+    & .battery_icon {
+      font-size: 64px;
+    }
+
+    & .percentage {
+      font-size: 54px;
+      font-weight: 700;
+    }
+
+    & .time_left {
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    & .graph {
+      & .bar {
+        background-color: $bg;
+      }
+    }
+  }
+}
