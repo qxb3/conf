@@ -102,7 +102,7 @@ function Controls() {
 export default function(gdkmonitor: Gdk.Monitor) {
   return (
     <FloatingWindow
-      className='controls'
+      className='controls_window'
       title='Controls'
       gdkmonitor={gdkmonitor}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT}
