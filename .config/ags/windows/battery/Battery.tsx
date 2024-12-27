@@ -72,16 +72,20 @@ function BatteryWindow() {
           css={`min-height: 125px;`}
           homogeneous={true}
           spacing={4}>
-          {Array.from({ length: 12 }).map((_, i) => (
-            <box
-              vertical={true}
-              valign={Gtk.Align.END}>
+          {Array.from({ length: 24 }).map((_, i) => {
+            const log = logs.slice(-24)[i] || { battery_level: 1 }
+
+            return (
               <box
-                className='bar'
-                css={`min-height: ${(logs[i]?.battery_level / 100) * 125 || 1}px;`}
-              />
-            </box>
-          ))}
+                vertical={true}
+                valign={Gtk.Align.END}>
+                <box
+                  className='bar'
+                  css={`min-height: ${log.battery_level}px;`}
+                />
+              </box>
+            )
+          })}
         </box>
       ))}
     </box>
