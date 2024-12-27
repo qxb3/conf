@@ -3,8 +3,6 @@
 CACHE_DIR="$HOME/.cache/ags"
 BATTERY_FILE="$CACHE_DIR/battery.json"
 
-rm "$BATTERY_FILE"
-
 mkdir -p "$CACHE_DIR"
 if [[ ! -f "$BATTERY_FILE" ]]; then
   echo "[]" > "$BATTERY_FILE"
@@ -22,5 +20,5 @@ while true; do
 
   echo "$UPDATED_CONTENT" > "$BATTERY_FILE"
 
-  sleep 1800
+  sleep 3600
 done
