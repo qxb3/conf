@@ -52,6 +52,8 @@ function BatteryWindow() {
                     return `Time To Full: ${formatDuration(timeToFull)}`
                   case Battery.State.DISCHARGING:
                     return `Time To Empty: ${formatDuration(timeToEmpty)}`
+                  case Battery.State.FULLY_CHARGED:
+                    return `Fully Charged`
                   default:
                     return `Unknown State`
                 }
