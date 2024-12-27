@@ -17,7 +17,7 @@ while true; do
 
   EXISTING_CONTENT=$(cat "$BATTERY_FILE")
 
-  NEW_LOG="{\"timestamp\": $TIMESTAMP, \"battery_level\": \"$BATTERY_CAPACITY\"}"
+  NEW_LOG="{\"timestamp\": $TIMESTAMP, \"battery_level\": $BATTERY_CAPACITY}"
   UPDATED_CONTENT=$(echo "$EXISTING_CONTENT" | jq -c ". + [$NEW_LOG]")
 
   echo "$UPDATED_CONTENT" > "$BATTERY_FILE"
