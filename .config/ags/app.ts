@@ -14,6 +14,7 @@ import Calendar from '@windows/calendar/Calendar'
 import Wallpapers from '@windows/wallpapers/Wallpapers'
 import MusicPlayer from '@windows/music_player/MusicPlayer'
 import Weather from '@windows/weather/Weather'
+import Controls from '@windows/controls/Controls'
 
 import requestHandler from './requestHandler'
 
@@ -38,6 +39,7 @@ App.start({
     Wallpapers(mainMonitor)
     MusicPlayer(mainMonitor)
     Weather(mainMonitor)
+    Controls(mainMonitor)
   },
   requestHandler: requestHandler
 })

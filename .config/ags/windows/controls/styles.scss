@@ -1,0 +1,27 @@
+.controls {
+  min-width: 250px;
+  margin-top: 490px;
+
+  & .content {
+    padding: 1.5rem 1rem;
+
+    & .name {
+      font-weight: 700;
+
+      &.mute {
+        text-decoration: line-through;
+      }
+    }
+
+    & .slider {
+      & trough {
+        background-color: $fg1;
+      }
+
+      & highlight {
+        background-color: $bg;
+        min-height: 15px;
+      }
+    }
+  }
+}

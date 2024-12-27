@@ -5,6 +5,7 @@ import { revealAppLauncher } from '@windows/app_launcher/vars'
 import { revealWallpapers } from '@windows/wallpapers/vars'
 import { revealMusicPlayer } from '@windows/music_player/vars'
 import { revealWeather } from '@windows/weather/vars'
+import { revealControls } from '@windows/controls/vars'
 
 function SideBar() {
   return (
@@ -156,8 +157,19 @@ function SideBar() {
 
 
         <button
-          className='controls'
-          cursor='pointer'>
+          className={
+            revealControls().as(revealed =>
+              revealed
+                ? 'controls_btn active'
+                : 'controls_btn'
+            )
+          }
+          cursor='pointer'
+          onClick={() => {
+            revealControls.set(
+              !revealControls.get()
+            )
+          }}>
           <box vertical={true}>
             <icon icon='custom-controls-symbolic' />
             <label label='Controls' />
