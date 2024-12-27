@@ -129,19 +129,10 @@ function NotifActions(props: { notification: Notifyd.Notification }) {
 
 function NotificationWidget(props: {
   notification: Notifyd.Notification
-  popup: boolean
+  popup: boolean,
+  popupTimeout: Variable<number> | undefined
 }) {
-  const { notification, popup } = props
-
-  let popupTimeout: Variable<number> | undefined
-
-  if (popup) {
-    const rate = 50
-    const speed = rate / (USER_SETTINGS.notifPopupTimeout - USER_SETTINGS.animationSpeed)
-
-    popupTimeout = Variable(0)
-      .poll(rate, (time) => Math.min(time + speed, 1.0))
-  }
+  const { notification, popup, popupTimeout } = props
 
   return (
     <box
@@ -208,6 +199,20 @@ export default function Notification(props: {
   const downRevealer = Variable(reveal)
   const sideRevealer = Variable(reveal)
 
+  let popupTimeout: Variable<number> | undefined
+
+  if (popup) {
+    const rate = 50
+    const speed = rate / (USER_SETTINGS.notifPopupTimeout - USER_SETTINGS.animationSpeed)
+
+    popupTimeout = Variable(0)
+      .poll(rate, (time) => Math.min(time + speed, 1.0))
+
+    timeout(USER_SETTINGS.notifPopupTimeout, () => {
+      onPopupTimeoutDone?.(remove)
+    })
+  }
+
   function remove() {
     sideRevealer.set(false)
 
@@ -220,23 +225,21 @@ export default function Notification(props: {
     })
   }
 
-  if (popup) {
-    timeout(USER_SETTINGS.notifPopupTimeout, () => {
-      onPopupTimeoutDone?.(remove)
-    })
-  }
-
   const notificationWidget = (
     <eventbox
       cursor={popup ? 'pointer' : ''}
       onClick={() => onClick?.(remove)}
-      onHoverLost={() => onHoverLost?.(remove)}>
+      onHoverLost={() => onHoverLost?.(remove)}
+      onDestroy={() => {
+        downRevealer.drop()
+        sideRevealer.drop()
+        popupTimeout?.drop()
+      }}>
       <box vertical={true}>
         <revealer
           revealChild={downRevealer()}
           transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
           transitionDuration={USER_SETTINGS.animationSpeed}
-          onDestroy={() => downRevealer.drop()}
           onRealize={() => {
             timeout(1, () => {
               downRevealer.set(true)
@@ -251,11 +254,11 @@ export default function Notification(props: {
                 timeout(USER_SETTINGS.animationSpeed, () => {
                   sideRevealer.set(true)
                 })
-              }}
-              onDestroy={() => sideRevealer.drop()}>
+              }}>
               <NotificationWidget
                 notification={notification}
                 popup={popup}
+                popupTimeout={popupTimeout}
               />
             </revealer>
           </box>
