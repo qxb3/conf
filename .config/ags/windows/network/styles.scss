@@ -1,0 +1,71 @@
+.network {
+  min-width: 300px;
+  min-height: 400px;
+
+  & .content {
+    & .header {
+      padding: 1rem;
+
+      & .title {
+        font-size: 18px;
+        font-weight: 700;
+      }
+    }
+
+    & .switch {
+      border: solid $bg 1px;
+
+      & slider {
+        background-color: $bg;
+        min-width: 24px;
+        min-height: 10px;
+        transition: 300ms;
+
+        &:checked {
+          background-color: #fff;
+        }
+      }
+    }
+
+    & .refresh {
+      & .icon {
+        font-size: 18px;
+      }
+    }
+  }
+
+  & .wifi_networks {
+    padding: 1rem;
+
+    & .ap {
+      padding: 4px 0;
+
+      & .icon { font-size: 24px; }
+      & .ssid { font-size: 16px; }
+
+      & .connect,
+      & .disconnect {
+        background-color: $bg;
+        padding: 8px 10px;
+
+        & .label {
+          color: $fg;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  & .no_wifi_network {
+    margin-top: 7rem;
+
+    & .icon {
+      font-size: 64px;
+    }
+
+    & .title {
+      font-size: 24px;
+      color: $bg2;
+    }
+  }
+}

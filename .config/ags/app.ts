@@ -6,6 +6,7 @@ import { compileScss } from './cssHotReload'
 import SideBar from '@windows/side_bar/SideBar'
 import TopBar from '@windows/top_bar/TopBar'
 
+import Network from '@windows/network/Network'
 import Battery from '@windows/battery/Battery'
 import NotificationPopups from '@windows/notification_popups/NotificationPopups'
 import NotificationCenter from '@windows/notification_center/NotificationCenter'
@@ -27,10 +28,12 @@ App.start({
       .get_monitors()
       .at(0)!
 
+    // Bars
     SideBar(mainMonitor)
     TopBar(mainMonitor)
 
     // TopBar Floating Windows
+    Network(mainMonitor)
     Battery(mainMonitor)
     NotificationPopups(mainMonitor)
     NotificationCenter(mainMonitor)

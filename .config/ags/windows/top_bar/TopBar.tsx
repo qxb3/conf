@@ -5,9 +5,10 @@ import Battery from 'gi://AstalBattery'
 import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { bind, Variable } from 'astal'
 
-import { revealCalendar } from '@windows/calendar/vars'
-import { revealNotificationCenter } from '@windows/notification_center/vars'
+import { revealNetwork } from '@windows/network/vars'
 import { revealBattery } from '@windows/battery/vars'
+import { revealNotificationCenter } from '@windows/notification_center/vars'
+import { revealCalendar } from '@windows/calendar/vars'
 
 const hyprland = Hyprland.get_default()
 const network = Network.get_default()
@@ -63,29 +64,45 @@ function Right() {
       className='right'
       halign={Gtk.Align.END}
       spacing={10}>
-      {bind(network, 'primary').as(primary => {
-        if (primary === Network.Primary.UNKNOWN) {
-          return (
-            <icon icon='network-wireless-offline-symbolic' />
-          )
+      <button
+        className={
+          revealNetwork()
+            .as(revealed =>
+              revealed
+                ? 'network_btn active'
+                : 'network_btn'
+            )
         }
-
-        if (primary === Network.Primary.WIRED) {
-          const wiredNetwork = network.get_wired()!
-
-          return (
-            <icon icon={bind(wiredNetwork, 'iconName')} />
+        cursor='pointer'
+        onClick={() => {
+          revealNetwork.set(
+            !revealNetwork.get()
           )
-        }
+        }}>
+          {bind(network, 'primary').as(primary => {
+            if (primary === Network.Primary.UNKNOWN) {
+              return (
+                <icon icon='network-wireless-offline-symbolic' />
+              )
+            }
 
-        if (primary === Network.Primary.WIFI) {
-          const wifiNetwork = network.get_wifi()!
+            if (primary === Network.Primary.WIRED) {
+              const wiredNetwork = network.get_wired()!
 
-          return (
-            <icon icon={bind(wifiNetwork, 'iconName')} />
-          )
-        }
-      })}
+              return (
+                <icon icon={bind(wiredNetwork, 'iconName')} />
+              )
+            }
+
+            if (primary === Network.Primary.WIFI) {
+              const wifiNetwork = network.get_wifi()!
+
+              return (
+                <icon icon={bind(wifiNetwork, 'iconName')} />
+              )
+            }
+        })}
+      </button>
 
       <button
         className={
