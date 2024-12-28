@@ -4,3 +4,4 @@ export { default as Notification } from './notification/Notification'
 
 export { default as FlowBox } from './FlowBox'
 export { default as ProgressBar } from './ProgressBar'
+export { default as CheckButton } from './CheckBox'

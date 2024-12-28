@@ -17,8 +17,6 @@
 
       & slider {
         background-color: $bg;
-        min-width: 24px;
-        min-height: 10px;
         transition: 300ms;
 
         &:checked {
@@ -42,15 +40,51 @@
 
       & .icon { font-size: 24px; }
       & .ssid { font-size: 16px; }
+      & .down-icon {
+        color: $bg2;
+        font-size: 10px;
+      }
 
-      & .connect,
-      & .disconnect {
-        background-color: $bg;
-        padding: 8px 10px;
+      & .dropdown {
+        & .password_container {
+          & .password {
+            border: solid $bg 1px;
+            padding: 4px;
+            caret-color: $bg;
+            font-size: 14px;
+          }
 
-        & .label {
-          color: $fg;
+          & .placeholder {
+            font-size: 14px;
+            color: $bg2;
+            padding: 4px 6px;
+          }
+        }
+
+        & .show_password {
+          font-size: 14px;
           font-weight: 700;
+
+          & check {
+            border: solid $bg 1px;
+          }
+        }
+
+        & .connect,
+        & .disconnected {
+          background-color: $bg;
+          padding: 4px 8px;
+
+          & .label {
+            color: $fg;
+            font-weight: 700;
+            font-size: 14px;
+          }
+        }
+
+        & .err {
+          color: red;
+          font-size: 14px;
         }
       }
     }
