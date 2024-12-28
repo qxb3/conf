@@ -2,8 +2,8 @@ import { Astal, Gdk, Gtk } from 'astal/gtk3'
 import { Binding, Variable } from 'astal'
 
 export default function FloatingWindow(props: {
-  className: string,
-  title: string,
+  className: string | Binding<string>,
+  title: string | Binding<string>,
   gdkmonitor: Gdk.Monitor,
   anchor: Astal.WindowAnchor | Binding<Astal.WindowAnchor>,
   revealer: Variable<boolean>,
