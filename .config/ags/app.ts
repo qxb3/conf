@@ -1,3 +1,5 @@
+#!/usr/bin/gjs -m
+
 import './globals'
 
 import { App } from 'astal/gtk3'
