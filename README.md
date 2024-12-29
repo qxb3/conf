@@ -6,24 +6,16 @@
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
 <br><br></div>
 
-> [!CAUTION]
-> Under construction.
-
-> [!CAUTION]
-> Under construction.
-
-> [!CAUTION]
-> Under construction.
-
 ## Screenshots
 
 <p align="center">
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/1.png" />
-  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" /> -->
-  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" /> -->
-  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" /> -->
-  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" /> -->
-  <!-- <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" /> -->
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/7.png" />
 </p>
 
 <br>
@@ -42,6 +34,11 @@ cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
 cp -r .scripts ~/ # Optional
+
+# Building ags
+cd ~/.config/ags/ags
+ags bundle app.ts ink
+
 # Restart your pc
 ```
 
@@ -63,10 +60,11 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
-  <tr><td>kanagawa-gtk-theme-git</td><td>kanagawa gtk theme</td></tr>
+  <tr><td>raleigh</td><td>raleigh gtk theme</td></tr>
   <tr><td>bibata-cursor-theme</td><td>bibata cursor</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>hyprlock</td><td>screen locker</td></tr>
+  <tr><td>hyprbars</td><td>hyprland bars plugin</td></tr>
   <tr><td>aylurs-gtk-shell-git</td><td>ags</td></tr>
   <tr><td>libastal-meta</td><td>ags widget library</td></tr></table>
 </td></tr></table>
@@ -159,13 +157,3 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 
 <br>
-
-## Command Mode Commands
-| Command | Description |
-| :--  | :-- |
-| <kbd>shutdown</kbd>| shudown pc
-| <kbd>restart</kbd>| restart pc
-| <kbd>suspend</kbd>| suspend & lock pc
-| <kbd>logout</kbd>| logout out hyprland session
-| <kbd>lock</kbd>| lock screen
-| <kbd>notif-clear</kbd>| clear notifications
