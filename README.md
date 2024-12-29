@@ -1,6 +1,7 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/qxb3/conf/refs/heads/main/repo/logo.png" width="80%" />
 
+  &ensp;[<kbd> <br> Ink <br> </kbd>](#------ink----)&ensp;
   &ensp;[<kbd> <br> Yume <br> </kbd>](#------yume----)&ensp;
   &ensp;[<kbd> <br> Groove <br> </kbd>](#------groove----)&ensp;
   &ensp;[<kbd> <br> Vim <br> </kbd>](#------vim----)&ensp;
@@ -8,6 +9,18 @@
   &ensp;[<kbd> <br> Ishi <br> </kbd>](#------ishi----)&ensp;
   &ensp;[<kbd> <br> Focused <br> </kbd>](#------focused----)&ensp;
 </div>
+
+<details open>
+  <summary>
+    <h2>
+      <a href="https://github.com/qxb3/conf/tree/ink">Ink</a>
+    </h2>
+  </summary>
+
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/1.png" />
+  <br><br>
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/ink/repo/2.png" />
+</details>
 
 <details open>
   <summary>
