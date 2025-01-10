@@ -37,4 +37,4 @@ function check_workspaces() {
 }
 
 check_workspaces "workspace"
-socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do check_workspaces "$line"; done
+socat - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do check_workspaces "$line"; done

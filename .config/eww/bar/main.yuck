@@ -99,7 +99,7 @@
     :class "window_title"
 
     (label
-      :text {_active_window.title}
+      :text {_active_window}
       :limit-width 48
     )
   )

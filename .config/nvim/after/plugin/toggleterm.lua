@@ -5,14 +5,12 @@ require('toggleterm').setup({
   float_opts = {
     border = 'single',
     width = function()
-      local winwidth = vim.fn.winwidth(0)
-
-      return math.floor(winwidth - (winwidth / 6))
+      local total_width = vim.o.columns
+      return math.floor(total_width - (total_width / 6))
     end,
     height = function()
-      local winheight = vim.fn.winheight(0)
-
-      return math.floor(winheight - (winheight / 5))
+      local total_height = vim.o.lines
+      return math.floor(total_height - (total_height / 5))
     end
   }
 })

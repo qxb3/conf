@@ -1,18 +1,13 @@
-ZSH=/usr/share/oh-my-zsh/
+ZSH=~/.oh-my-zsh
 ZSH_THEME='robbyrussell'
-
-# https://github.com/jeffreytse/zsh-vi-mode/issues/248
-# zvm_config() {
-#   local ncur=$(zvm_cursor_style $ZVM_NORMAL_MODE_CURSOR)
-#   local icur=$(zvm_cursor_style $ZVM_INSERT_MODE_CURSOR)
-#
-#   ZVM_NORMAL_MODE_CURSOR=$ncur'\e\e]122;#FFFFFF\a'
-#   ZVM_INSERT_MODE_CURSOR=$icur'\e\e]122;#78A9FF\a'
-# }
 
 ZVM_VI_ESCAPE_BINDKEY=qq
 ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
 ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
+
+if [ -f /usr/bin/neofetch ]; then
+  neofetch
+fi
 
 plugins=(
   git
@@ -22,21 +17,22 @@ plugins=(
   zsh-syntax-highlighting
   zsh-vi-mode
 )
+
 source $ZSH/oh-my-zsh.sh
 
 if pacman -Qi yay &>/dev/null ; then
-   aurhelper="yay"
+  aurhelper="yay"
 elif pacman -Qi paru &>/dev/null ; then
-   aurhelper="paru"
+  aurhelper="paru"
 fi
 
 function in {
-    local pkg="$1"
-    if pacman -Si "$pkg" &>/dev/null ; then
-        sudo pacman -S "$pkg"
-    else
-        "$aurhelper" -S "$pkg"
-    fi
+  local pkg="$1"
+  if pacman -Si "$pkg" &>/dev/null ; then
+    sudo pacman -S "$pkg"
+  else
+    "$aurhelper" -S "$pkg"
+  fi
 }
 
 # Aliases
@@ -51,7 +47,8 @@ alias pa='$aurhelper -Ss' # list availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
 alias open='xdg-open'
-alias vim='nvim'
+alias vim='nvim --listen /tmp/nvim'
+alias nvim='nvim --listen /tmp/nvim'
 alias c='clear'
 alias rm='rm -rf'
 alias m='mkdir -p'
@@ -60,10 +57,9 @@ alias cp='cp -r'
 alias x='exit'
 
 # Exports
-export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH=$HOME/.scripts:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=./node_modules/.bin:./vendor/bin:$PATH
+export PATH=$PATH:/opt/android-sdk/platform-tools
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Created by `pipx` on 2024-01-05 01:07:43
-export PATH="$PATH:/home/qxb3/.local/bin"
