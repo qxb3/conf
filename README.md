@@ -61,6 +61,16 @@
 <details open>
   <summary>
     <h2>
+      <a href="https://github.com/qxb3/conf/tree/calm">Calm</a>
+    </h2>
+  </summary>
+
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/calm/repo/1.png" />
+</div>
+
+<details open>
+  <summary>
+    <h2>
       <a href="https://github.com/qxb3/conf/tree/kami">Kami</a>
     </h2>
   </summary>
