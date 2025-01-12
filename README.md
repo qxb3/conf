@@ -1,4 +1,4 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/cappy/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/calm/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
@@ -9,7 +9,7 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="100%%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/cappy/repo/1.png" />
+  <img align="center" width="100%%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/calm/repo/1.png" />
 </p>
 
 <br>
@@ -23,7 +23,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 --single-branch --branch cappy https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch calm https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
