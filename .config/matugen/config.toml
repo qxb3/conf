@@ -1,0 +1,11 @@
+[config]
+
+[templates.hyprland]
+input_path = '~/.config/matugen/hyprland.conf'
+output_path = '~/.config/hypr/colors.conf'
+post_hook = 'hyprctl reload'
+
+[templates.kitty]
+input_path = '~/.config/matugen/kitty.conf'
+output_path = '~/.config/kitty/theme.conf'
+post_hook = 'killall -USR1 kitty'

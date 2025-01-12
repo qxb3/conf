@@ -48,8 +48,46 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-vim.o.background = 'dark'
-vim.cmd('colorscheme kanagawa')
+local function setup()
+  vim.cmd("highlight clear")
+  vim.o.background = "dark" -- Set the background (dark or light)
+  vim.g.colors_name = "terminal_colors" -- Set the colorscheme name
+
+  vim.cmd("set termguicolors")
+  vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+
+  -- Define highlight groups using terminal colors
+  local highlights = {
+    Normal       = { ctermfg = "NONE", ctermbg = "NONE" },
+    Comment      = { ctermfg = 8, ctermbg = "NONE" },
+    Constant     = { ctermfg = 12, ctermbg = "NONE" },
+    Identifier   = { ctermfg = 11, ctermbg = "NONE" },
+    Statement    = { ctermfg = 9, ctermbg = "NONE" },
+    PreProc      = { ctermfg = 13, ctermbg = "NONE" },
+    Type         = { ctermfg = 14, ctermbg = "NONE" },
+    Special      = { ctermfg = 10, ctermbg = "NONE" },
+    Underlined   = { ctermfg = "NONE", ctermbg = "NONE", cterm = "underline" },
+    Error        = { ctermfg = 15, ctermbg = 1 },
+    Todo         = { ctermfg = 0, ctermbg = 11 },
+  }
+
+  -- Apply the highlight groups
+  for group, opts in pairs(highlights) do
+    local cmd = string.format(
+      "highlight %s ctermfg=%s ctermbg=%s %s",
+      group,
+      opts.ctermfg or "NONE",
+      opts.ctermbg or "NONE",
+      opts.cterm and ("cterm=" .. opts.cterm) or ""
+    )
+    vim.cmd(cmd)
+  end
+end
+
+setup()
+
+-- vim.o.background = 'dark'
+-- vim.cmd('colorscheme kanagawa')
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
