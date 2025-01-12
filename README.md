@@ -1,21 +1,15 @@
-<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/logo.png"><br><br>
+<div align = center><img src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/cappy/repo/logo.png"><br><br>
 
 &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
 &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
 &ensp;[<kbd> <br> Dependecies <br> </kbd>](#Dependecies)&ensp;
 &ensp;[<kbd> <br> Keybindings <br> </kbd>](#Keybindings)&ensp;
-&ensp;[<kbd> <br> Commands <br> </kbd>](#Command-Mode-Commands)&ensp;
 <br><br></div>
 
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/5.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/vim_styled/repo/6.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/cappy/repo/1.png" />
 </p>
 
 <br>
@@ -29,7 +23,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 --single-branch --branch vim_styled https://github.com/qxb3/gruvbox.hypr
+git clone --depth=1 --single-branch --branch cappy https://github.com/qxb3/gruvbox.hypr
 cd gruvbox.hypr
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
@@ -55,7 +49,6 @@ cp -r .scripts ~/ # Optional
 
 <table><tr><td>
   <code>r</code><br><code>i</code><br><code>c</code><br><code>e</code><br></td><td><table>
-  <tr><td>kanagawa-gtk-theme-git</td><td>kanagawa gtk theme</td></tr>
   <tr><td>bibata-cursor-theme</td><td>bibata cursor</td></tr>
   <tr><td>swww</td><td>wallpaper daemon</td></tr>
   <tr><td>hyprlock</td><td>screen locker</td></tr>
@@ -71,6 +64,7 @@ cp -r .scripts ~/ # Optional
   <tr><td>neovim</td><td>text editor</td></tr>
   <tr><td>neofetch</td><td>beautiful sys info</td></tr>
   <tr><td>cava</td><td>music visualizer</td></tr>
+  <tr><td>fum</td><td>tui music player</td></tr>
   <tr><td>brightnessctl</td><td>control brightness</td></tr></table>
 </td></tr></table>
 
@@ -150,13 +144,3 @@ cp -r .scripts ~/ # Optional
 | <kbd>Super</kbd> + <kbd>L</kbd> | lock screen
 
 <br>
-
-## Command Mode Commands
-| Command | Description |
-| :--  | :-- |
-| <kbd>shutdown</kbd>| shudown pc
-| <kbd>restart</kbd>| restart pc
-| <kbd>suspend</kbd>| suspend & lock pc
-| <kbd>logout</kbd>| logout out hyprland session
-| <kbd>lock</kbd>| lock screen
-| <kbd>notif-clear</kbd>| clear notifications

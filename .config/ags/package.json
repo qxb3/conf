@@ -1,0 +1,6 @@
+{
+  "name": "cappy-shell",
+  "dependencies": {
+    "astal": "/usr/share/astal/gjs"
+  }
+}
