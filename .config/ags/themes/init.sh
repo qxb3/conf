@@ -3,7 +3,7 @@
 # init.sh
 # Initialize symlinks of theme defaults ($DEFAULT_THEME) on LOCAL_STATE
 
-DEFAULT_THEME="oxocarbon"
+DEFAULT_THEME="everforest"
 
 WALLPAPERS_PATH="$HOME/.config/swww"
 HYPR_THEME="$HOME/.config/hypr"
