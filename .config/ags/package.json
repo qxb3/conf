@@ -1,6 +1,13 @@
 {
-    "name": "astal-shell",
-    "dependencies": {
-        "astal": "/usr/share/astal/gjs"
-    }
+  "name": "space",
+  "scripts": {
+    "start": "ags run --gtk4",
+    "dev": "nodemon -e scss,ts,tsx --exec 'npm run start'"
+  },
+  "dependencies": {
+    "astal": "/usr/share/astal/gjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }

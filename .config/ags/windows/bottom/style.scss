@@ -1,0 +1,23 @@
+bottom {
+  .workspaces {
+    .workspace {
+      border-top: solid 3px $fg;
+      border-left: solid 3px $fg;
+
+      font-size: 18px;
+      padding: 4px 2rem;
+
+      &.active {
+        background-color: $fg;
+
+        & label {
+          color: $bg;
+        }
+      }
+
+      &:last-child {
+        border-right: solid 3px $fg;
+      }
+    }
+  }
+}
