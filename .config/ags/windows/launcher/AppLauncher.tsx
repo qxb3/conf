@@ -5,6 +5,7 @@ import { Astal, Gdk, Gtk, hook } from 'astal/gtk4'
 import { Variable } from 'astal'
 
 import { revealApplauncher } from './vars'
+import Wp05 from 'gi://Wp'
 
 const applications = new Applications.Apps({
   nameMultiplier: 2,
@@ -27,31 +28,33 @@ function ApplicationList() {
         vertical={true}
         spacing={8}>
         {queriedApps(apps =>
-          apps.map(app => (
-            <button
-              cssClasses={
-                selectedApp(selectedApp =>
-                  selectedApp.get_name() === app.get_name()
-                    ? ['app', 'selected']
-                    : ['app']
-                )
-              }
-              cursor={Gdk.Cursor.new_from_name('pointer', null)}
-              onClicked={() => {
-                revealApplauncher.set(false)
-                app.launch()
-              }}>
-              <box spacing={4}>
-                <label label={'/'.repeat(Math.random() * 3)} />
-                <label
-                  label={app.get_name()}
-                  maxWidthChars={20}
-                  ellipsize={Pango.EllipsizeMode.END}
-                />
-                <label label={'/'.repeat(Math.random() * 3)} />
-              </box>
-            </button>
-          ))
+          apps.length <= 0
+            ? <label label='No result (dumbass)' />
+            : apps.map(app => (
+              <button
+                cssClasses={
+                  selectedApp(selectedApp =>
+                    selectedApp.get_name() === app.get_name()
+                      ? ['app', 'selected']
+                      : ['app']
+                  )
+                }
+                cursor={Gdk.Cursor.new_from_name('pointer', null)}
+                onClicked={() => {
+                  revealApplauncher.set(false)
+                  app.launch()
+                }}>
+                <box spacing={4}>
+                  <label label={'/'.repeat(Math.random() * 3)} />
+                  <label
+                    label={app.get_name()}
+                    maxWidthChars={20}
+                    ellipsize={Pango.EllipsizeMode.END}
+                  />
+                  <label label={'/'.repeat(Math.random() * 3)} />
+                </box>
+              </button>
+            ))
         )}
       </box>
     </Gtk.ScrolledWindow>
