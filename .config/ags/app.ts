@@ -1,8 +1,10 @@
 import { App } from 'astal/gtk4'
 
 import Bar from './windows/bar/Bar'
-import style from './style.scss'
 import Music from './windows/music/Music'
+
+import style from './style.scss'
+import requestHandler from './requestHandler'
 
 App.start({
   css: style,
@@ -12,5 +14,6 @@ App.start({
 
     Bar(monitor)
     Music(monitor)
-  }
+  },
+  requestHandler
 })

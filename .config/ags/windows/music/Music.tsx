@@ -2,6 +2,7 @@ import Mpris from 'gi://AstalMpris'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
 import { bind } from 'astal'
+import { revealMusic } from './vars'
 
 const spotify = Mpris.Player.new('spotify')
 
@@ -134,7 +135,7 @@ export default function(monitor: Gdk.Monitor) {
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP}
       exclusivity={Astal.Exclusivity.NORMAL}
-      visible={true}>
+      visible={revealMusic()}>
       <Music />
     </window>
   )
