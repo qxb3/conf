@@ -8,13 +8,21 @@ const hyprland = Hyprland.get_default()
 
 const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
+const workspaces = [
+  { name: 'one /', fn: () => revealMusic.set(!revealMusic.get()) },
+  { name: 'two //', fn: () => {} },
+  { name: '/ three //', fn: () => {} },
+  { name: '/// four /', fn: () => {} },
+  { name: '/// five //', fn: () => {} }
+]
+
 function Workspaces() {
   return (
     <box
       name='workspaces'
       cssClasses={['workspaces']}
       spacing={8}>
-      {['one /', 'two //', '/ three //', '/// four /', '/// five //'].map((name, i) => (
+      {workspaces.map(({ name, fn }, i) => (
         <button
           cssClasses={
             bind(hyprland, 'focusedWorkspace')
@@ -25,7 +33,15 @@ function Workspaces() {
               ))
           }
           cursor={Gdk.Cursor.new_from_name('pointer', null)}
-          onClicked={() => hyprland.message(`dispatch workspace ${i + 1}`)}>
+          onButtonPressed={(_, event) => {
+            switch (event.get_button()) {
+              case 1:
+                hyprland.message(`dispatch workspace ${i + 1}`)
+                break
+              case 3:
+                fn()
+            }
+          }}>
           <label
             cssClasses={['name']}
             label={name}
@@ -68,11 +84,13 @@ function Center() {
         }>
         <Workspaces />
 
-        <label
+        <button
           name='music'
           cssClasses={['music_title']}
+          cursor={Gdk.Cursor.new_from_name('pointer', null)}
           label='Music Player'
           halign={Gtk.Align.CENTER}
+          onClicked={() => revealMusic.set(false)}
         />
       </stack>
     </box>
