@@ -29,6 +29,7 @@ $border: $fg;
 }
 
 @import "./windows/bar/style.scss";
+@import "./windows/desktop/style.scss";
 @import "./windows/launcher/style.scss";
 @import "./windows/music/style.scss";
 @import "./windows/power/style.scss";

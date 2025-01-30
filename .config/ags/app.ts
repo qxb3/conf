@@ -7,6 +7,7 @@ import Power from './windows/power/Power'
 
 import style from './style.scss'
 import requestHandler from './requestHandler'
+import Desktop from './windows/desktop/Desktop'
 
 App.start({
   css: style,
@@ -15,6 +16,7 @@ App.start({
     const monitor = App.get_monitors().at(0)!
 
     Bar(monitor)
+    Desktop(monitor)
     AppLauncher(monitor)
     Music(monitor)
     Power(monitor)

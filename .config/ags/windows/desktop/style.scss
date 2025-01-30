@@ -1,0 +1,38 @@
+desktop {
+  background-color: $bg;
+  border: solid $border 1px;
+  min-width: 220px;
+  margin-top: 8px;
+  margin-left: 8px;
+  padding: 8px;
+  font-size: 18px;
+
+  .me {
+    border: solid $border 1px;
+    padding: 8px;
+
+    .pfp {
+      border: solid $border 1px;
+      min-width: 70px;
+      min-height: 70px;
+    }
+
+    .name {
+      background-color: $primary;
+      border: solid $border 1px;
+      padding: 0 4px;
+    }
+  }
+
+  .controls {
+    border: solid $border 1px;
+    padding: 8px;
+
+    .slider {
+      highlight {
+        background-color: $primary;
+        min-height: 12px;
+      }
+    }
+  }
+}

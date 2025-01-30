@@ -3,6 +3,7 @@ import Hyprland from 'gi://AstalHyprland'
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
 import { bind, Variable } from 'astal'
 
+import { revealDesktop } from '../desktop/vars'
 import { revealApplauncher } from '../launcher/vars'
 import { revealMusic } from '../music/vars'
 import { revealPower } from '../power/vars'
@@ -71,16 +72,22 @@ function Left() {
     <box
       cssClasses={['left']}
       spacing={8}>
-      <image
-        cssClasses={['logo']}
-        iconName='arch-symbolic'
-        pixelSize={24}
-      />
+      <button
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
+        onClicked={() => revealDesktop.set(!revealDesktop.get())}>
+        <box spacing={8}>
+          <image
+            cssClasses={['logo']}
+            iconName='arch-symbolic'
+            pixelSize={24}
+          />
 
-      <label
-        cssClasses={['title']}
-        label='/ Hyprland //'
-      />
+          <label
+            cssClasses={['title']}
+            label='/ Hyprland //'
+          />
+        </box>
+      </button>
     </box>
   )
 }
