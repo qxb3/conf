@@ -7,18 +7,19 @@ import Pango from 'gi://Pango?version=1.0'
 
 const spotify = Mpris.Player.new('spotify')
 
-function CoverArt() {
+function CoverArt({ isAvailable }: { isAvailable: boolean }) {
   return (
     <image
       cssClasses={['cover_art']}
       file={
         bind(spotify, 'coverArt')
+          .as(coverArt => isAvailable ? coverArt : `${SRC}/assets/pink.no_music.png`)
       }
     />
   )
 }
 
-function Meta() {
+function Meta({ isAvailable }: { isAvailable: boolean }) {
   return (
     <box
       cssClasses={['meta']}
@@ -28,7 +29,7 @@ function Meta() {
         cssClasses={['title']}
         label={
           bind(spotify, 'title')
-            .as(title => `// ${title} /`)
+            .as(title => isAvailable ? `// ${title} /` : '// null /')
         }
         maxWidthChars={24}
         ellipsize={Pango.EllipsizeMode.END}
@@ -41,7 +42,7 @@ function Meta() {
         cssClasses={['artist']}
         label={
           bind(spotify, 'artist')
-            .as(artist => `/ ${artist} //`)
+            .as(artist => isAvailable ? `/ ${artist} //` : '/ null //')
         }
         maxWidthChars={24}
         overflow={Gtk.Overflow.HIDDEN}
@@ -113,18 +114,23 @@ function Progress() {
 function Music() {
   return (
     <box
-      cssName='music'
-      spacing={8}>
-      <CoverArt />
+      cssName='music'>
+      {bind(spotify, 'available')
+        .as(isAvailable => (
+          <box spacing={8}>
+            <CoverArt isAvailable={isAvailable} />
 
-      <box
-        vertical={true}
-        spacing={12}
-        hexpand={true}>
-        <Meta />
-        <Controls />
-        <Progress />
-      </box>
+            <box
+              vertical={true}
+              spacing={12}
+              hexpand={true}>
+              <Meta isAvailable={isAvailable} />
+              <Controls />
+              <Progress />
+            </box>
+          </box>
+        ))
+      }
     </box>
   )
 }
