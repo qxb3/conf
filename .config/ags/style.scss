@@ -1,0 +1,31 @@
+$bgh:       #080a12;
+$bg:        #0c101c;
+$bg1:       #0f1424;
+$bg2:       #171f36;
+
+$fgh:       #eae1c8;
+$fg:        #e9e0c5;
+$fg1:       #e3d7b5;
+$fg2:       #dccea3;
+
+$pink:      #e44180;
+$blue:      #0c101c;
+$red:       #e4415c;
+$green:     #e44166;
+$yellow:    #e46480;
+$orange:    #e47b91;
+$purple:    #e44199;
+$aqua:      #e45180;
+$gray:      #e4728f;
+
+$primary: $pink;
+$secondary: $blue;
+$border: $fg;
+
+* {
+  all: unset;
+  font-family: "Pixelify Sans";
+  color: $fg;
+}
+
+@import "./windows/bar/style.scss";
