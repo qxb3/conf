@@ -13,7 +13,7 @@ function CoverArt({ isAvailable }: { isAvailable: boolean }) {
       cssClasses={['cover_art']}
       file={
         bind(spotify, 'coverArt')
-          .as(coverArt => isAvailable ? coverArt : `${SRC}/assets/pink.no_music.png`)
+          .as(coverArt => isAvailable ? coverArt : `${SRC}/assets/no_music.png`)
       }
     />
   )
