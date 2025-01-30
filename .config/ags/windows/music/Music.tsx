@@ -135,8 +135,15 @@ export default function(monitor: Gdk.Monitor) {
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP}
       exclusivity={Astal.Exclusivity.NORMAL}
-      visible={revealMusic()}>
-      <Music />
+      defaultWidth={1}
+      defaultHeight={1}
+      visible={true}>
+      <revealer
+        revealChild={revealMusic()}
+        transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}
+        transitionDuration={200}>
+        <Music />
+      </revealer>
     </window>
   )
 }

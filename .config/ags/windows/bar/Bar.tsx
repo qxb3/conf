@@ -9,8 +9,8 @@ const hyprland = Hyprland.get_default()
 const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
 const workspaces = [
-  { name: 'one /',        action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
-  { name: 'two //',       action: 'none',         fn: () => {} },
+  { name: 'one /',        action: 'app launcher', fn: () => {} },
+  { name: 'two //',       action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
   { name: '/ three //',   action: 'none',         fn: () => {} },
   { name: '/// four /',   action: 'none',         fn: () => {} },
   { name: '/// five //',  action: 'none',         fn: () => {} }
