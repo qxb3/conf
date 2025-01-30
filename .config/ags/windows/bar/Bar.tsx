@@ -1,16 +1,18 @@
 import Hyprland from 'gi://AstalHyprland'
 
 import { Astal, Gdk } from 'astal/gtk4'
-import { bind } from 'astal'
+import { bind, Variable } from 'astal'
 
 const hyprland = Hyprland.get_default()
+
+const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
 function Workspaces() {
   return (
     <box
       cssClasses={['workspaces']}
       spacing={8}>
-      {['one', 'two', 'three', 'four', 'five'].map((name, i) => (
+      {['one /', 'two //', '/ three //', '/// four /', '/// five //'].map((name, i) => (
         <button
           cssClasses={
             bind(hyprland, 'focusedWorkspace')
@@ -61,7 +63,19 @@ function Center() {
 
 function Right() {
   return (
-    <box cssClasses={['right']}>
+    <box
+      cssClasses={['right']}
+      spacing={12}>
+      <label label='//' />
+      <label label={time()} />
+      <label label='/' />
+
+      <button
+        cssClasses={['power_btn']}
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
+        onClicked={() => {}}>
+        <label label='/ POWER //' />
+      </button>
     </box>
   )
 }

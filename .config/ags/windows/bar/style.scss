@@ -1,6 +1,6 @@
 bar {
   background-color: $bg;
-  margin: 8px;
+  margin: 8px 8px 0 8px;
   padding: 8px 12px;
   font-size: 18px;
 
@@ -16,6 +16,14 @@ bar {
           background-color: $primary;
         }
       }
+    }
+  }
+
+  & .right {
+    & .power_btn {
+      background-color: $primary;
+      border: solid $border 1px;
+      padding: 0 8px;
     }
   }
 }
