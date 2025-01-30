@@ -1,7 +1,8 @@
 import Hyprland from 'gi://AstalHyprland'
 
-import { Astal, Gdk } from 'astal/gtk4'
+import { Astal, Gdk, Gtk } from 'astal/gtk4'
 import { bind, Variable } from 'astal'
+import { revealMusic } from '../music/vars'
 
 const hyprland = Hyprland.get_default()
 
@@ -10,6 +11,7 @@ const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 function Workspaces() {
   return (
     <box
+      name='workspaces'
       cssClasses={['workspaces']}
       spacing={8}>
       {['one /', 'two //', '/ three //', '/// four /', '/// five //'].map((name, i) => (
@@ -56,7 +58,23 @@ function Left() {
 function Center() {
   return (
     <box cssClasses={['center']}>
-      <Workspaces />
+      <stack
+        visibleChildName={
+          bind(Variable.derive([bind(revealMusic)], (revealMusic) => {
+            if (revealMusic) return 'music'
+
+            return 'workspaces'
+          }))
+        }>
+        <Workspaces />
+
+        <label
+          name='music'
+          cssClasses={['music_title']}
+          label='Music Player'
+          halign={Gtk.Align.CENTER}
+        />
+      </stack>
     </box>
   )
 }

@@ -6,9 +6,9 @@ bar {
 
   /* & .left {} */
 
-  & .center {
-    & .workspaces {
-      & .workspace {
+  .center {
+    .workspaces {
+      .workspace {
         border: solid $border 1px;
         padding: 0 8px;
 
@@ -17,10 +17,15 @@ bar {
         }
       }
     }
+
+    .music_title {
+      border: solid $border 1px;
+      padding: 0 2rem;
+    }
   }
 
-  & .right {
-    & .power_btn {
+  .right {
+    .power_btn {
       background-color: $primary;
       border: solid $border 1px;
       padding: 0 8px;
