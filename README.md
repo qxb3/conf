@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/logo.png" />
+  <img width="80%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/logo.png" />
 
   &ensp;[<kbd> <br> Screenshots <br> </kbd>](#Screenshots)&ensp;
   &ensp;[<kbd> <br> Installation <br> </kbd>](#Installation)&ensp;
@@ -10,11 +10,10 @@
 ## Screenshots
 
 <p align="center">
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/1.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/2.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/3.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/4.png" />
-  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/yume/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/1.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/2.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/3.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/4.png" />
 </p>
 
 <br>
@@ -28,7 +27,7 @@
 > Please see [Dependecies](#Dependecies)
 
 ```bash
-git clone --depth=1 --single-branch --branch yume https://github.com/qxb3/conf
+git clone --depth=1 --single-branch --branch retro https://github.com/qxb3/conf
 cd conf
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
