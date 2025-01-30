@@ -1,6 +1,7 @@
 import { App } from 'astal/gtk4'
 
 import Bar from './windows/bar/Bar'
+import AppLauncher from './windows/launcher/AppLauncher'
 import Music from './windows/music/Music'
 
 import style from './style.scss'
@@ -13,6 +14,7 @@ App.start({
     const monitor = App.get_monitors().at(0)!
 
     Bar(monitor)
+    AppLauncher(monitor)
     Music(monitor)
   },
   requestHandler

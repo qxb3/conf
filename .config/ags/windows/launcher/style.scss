@@ -1,0 +1,25 @@
+app_launcher {
+  background-color: $bg;
+  border: solid $border 1px;
+  margin-top: 8px;
+  padding: 8px;
+  min-width: 300px;
+  min-height: 250px;
+  font-size: 18px;
+
+  .applications {
+    .app {
+      border: solid $border 1px;
+      padding: 2px 4px;
+
+      &.selected {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .query_box {
+    border: solid $border 1px;
+    padding: 4px;
+  }
+}

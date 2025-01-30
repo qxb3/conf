@@ -3,6 +3,7 @@ import Mpris from 'gi://AstalMpris'
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
 import { bind } from 'astal'
 import { revealMusic } from './vars'
+import Pango from 'gi://Pango?version=1.0'
 
 const spotify = Mpris.Player.new('spotify')
 
@@ -30,6 +31,7 @@ function Meta() {
             .as(title => `// ${title} /`)
         }
         maxWidthChars={24}
+        ellipsize={Pango.EllipsizeMode.END}
         overflow={Gtk.Overflow.HIDDEN}
         justify={Gtk.Justification.LEFT}
         xalign={0}

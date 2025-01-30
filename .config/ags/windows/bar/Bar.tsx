@@ -2,6 +2,8 @@ import Hyprland from 'gi://AstalHyprland'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
 import { bind, Variable } from 'astal'
+
+import { revealApplauncher } from '../launcher/vars'
 import { revealMusic } from '../music/vars'
 
 const hyprland = Hyprland.get_default()
@@ -63,33 +65,6 @@ function Workspaces() {
   )
 }
 
-      // {workspaces.map(({ name, fn }, i) => (
-      //   <button
-      //     cssClasses={
-      //       bind(hyprland, 'focusedWorkspace')
-      //         .as(focusedWorkspace => (
-      //           focusedWorkspace.get_id() === i + 1
-      //             ? ['workspace', 'active']
-      //             : ['workspace']
-      //         ))
-      //     }
-      //     cursor={Gdk.Cursor.new_from_name('pointer', null)}
-      //     onButtonPressed={(_, event) => {
-      //       switch (event.get_button()) {
-      //         case 1:
-      //           hyprland.message(`dispatch workspace ${i + 1}`)
-      //           break
-      //         case 3:
-      //           fn()
-      //       }
-      //     }}>
-      //     <label
-      //       cssClasses={['name']}
-      //       label={name}
-      //     />
-      //   </button>
-      // ))}
-      //
 function Left() {
   return (
     <box
@@ -114,7 +89,8 @@ function Center() {
     <box cssClasses={['center']}>
       <stack
         visibleChildName={
-          bind(Variable.derive([bind(revealMusic)], (revealMusic) => {
+          bind(Variable.derive([bind(revealApplauncher), bind(revealMusic)], (revealApplauncher, revealMusic) => {
+            if (revealApplauncher) return 'launcher'
             if (revealMusic) return 'music'
 
             return 'workspaces'
@@ -123,8 +99,17 @@ function Center() {
         <Workspaces />
 
         <button
+          name='launcher'
+          cssClasses={['bar_mode']}
+          cursor={Gdk.Cursor.new_from_name('pointer', null)}
+          label='App Launcher'
+          halign={Gtk.Align.CENTER}
+          onClicked={() => revealMusic.set(false)}
+        />
+
+        <button
           name='music'
-          cssClasses={['music_title']}
+          cssClasses={['bar_mode']}
           cursor={Gdk.Cursor.new_from_name('pointer', null)}
           label='Music Player'
           halign={Gtk.Align.CENTER}

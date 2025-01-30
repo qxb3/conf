@@ -1,10 +1,15 @@
-import { revealMusic } from "./windows/music/vars"
+import { revealApplauncher } from './windows/launcher/vars'
+import { revealMusic } from './windows/music/vars'
 
 export default function(req: string, res: (response: any) => void) {
   let args = req.split(':')
 
   if (args[0] === 'toggle') {
     switch (args[1]) {
+      case 'launcher':
+        revealApplauncher.set(!revealApplauncher.get())
+        res(`toggled ${args[1]}`)
+        break
       case 'music':
         revealMusic.set(!revealMusic.get())
         res(`toggled: ${args[1]}`)
