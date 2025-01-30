@@ -1,5 +1,6 @@
 import { revealApplauncher } from './windows/launcher/vars'
 import { revealMusic } from './windows/music/vars'
+import { revealPower } from './windows/power/vars'
 
 export default function(req: string, res: (response: any) => void) {
   let args = req.split(':')
@@ -12,6 +13,11 @@ export default function(req: string, res: (response: any) => void) {
         break
       case 'music':
         revealMusic.set(!revealMusic.get())
+        res(`toggled: ${args[1]}`)
+        break
+
+      case 'power':
+        revealPower.set(!revealPower.get())
         res(`toggled: ${args[1]}`)
         break
       default:

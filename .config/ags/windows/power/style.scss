@@ -1,0 +1,18 @@
+power {
+  background-color: $bg;
+  border: solid $border 1px;
+  min-width: 150px;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding: 8px;
+  font-size: 18px;
+
+  .power {
+    border: solid $border 1px;
+    padding: 4px 4px;
+
+    &:hover {
+      background-color: $primary;
+    }
+  }
+}

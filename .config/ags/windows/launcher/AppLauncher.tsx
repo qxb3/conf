@@ -5,7 +5,6 @@ import { Astal, Gdk, Gtk, hook } from 'astal/gtk4'
 import { Variable } from 'astal'
 
 import { revealApplauncher } from './vars'
-import Wp05 from 'gi://Wp'
 
 const applications = new Applications.Apps({
   nameMultiplier: 2,
@@ -109,7 +108,7 @@ function AppLauncher() {
 export default function(monitor: Gdk.Monitor) {
   return (
     <window
-      namespace='astal_window_applauncher'
+      namespace='astal_window'
       gdkmonitor={monitor}
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP}

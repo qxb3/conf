@@ -138,7 +138,7 @@ function Music() {
 export default function(monitor: Gdk.Monitor) {
   return (
     <window
-      namespace='astal_window_music'
+      namespace='astal_window'
       gdkmonitor={monitor}
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP}

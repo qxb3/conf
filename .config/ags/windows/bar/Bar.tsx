@@ -5,13 +5,14 @@ import { bind, Variable } from 'astal'
 
 import { revealApplauncher } from '../launcher/vars'
 import { revealMusic } from '../music/vars'
+import { revealPower } from '../power/vars'
 
 const hyprland = Hyprland.get_default()
 
 const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
 const workspaces = [
-  { name: 'one /',        action: 'app launcher', fn: () => {} },
+  { name: 'one /',        action: 'app launcher', fn: () => revealApplauncher.set(!revealApplauncher.get()) },
   { name: 'two //',       action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
   { name: '/ three //',   action: 'none',         fn: () => {} },
   { name: '/// four /',   action: 'none',         fn: () => {} },
@@ -104,7 +105,7 @@ function Center() {
           cursor={Gdk.Cursor.new_from_name('pointer', null)}
           label='App Launcher'
           halign={Gtk.Align.CENTER}
-          onClicked={() => revealMusic.set(false)}
+          onClicked={() => revealApplauncher.set(false)}
         />
 
         <button
@@ -132,7 +133,7 @@ function Right() {
       <button
         cssClasses={['power_btn']}
         cursor={Gdk.Cursor.new_from_name('pointer', null)}
-        onClicked={() => {}}>
+        onClicked={() => revealPower.set(!revealPower.get())}>
         <label label='/ POWER //' />
       </button>
     </box>
@@ -152,7 +153,7 @@ function Bar() {
 export default function(monitor: Gdk.Monitor) {
   return (
     <window
-      namespace='astal_window_bar'
+      namespace='astal_window'
       gdkmonitor={monitor}
       layer={Astal.Layer.TOP}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
