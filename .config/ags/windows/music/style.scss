@@ -1,0 +1,49 @@
+music {
+  background-color: $bg;
+  min-width: 350px;
+  margin-top: 8px;
+  padding: 8px;
+
+  .cover_art {
+    min-width: 130px;
+    min-height: 130px;
+  }
+
+  .meta {
+    .title {
+      background-color: $primary;
+      border: solid $border 1px;
+      padding: 2px 4px;
+      font-size: 18px;
+    }
+
+    .artist {
+      border: solid $border 1px;
+      padding: 2px 4px;
+      font-size: 18px;
+    }
+  }
+
+  .controls {
+    font-size: 15px;
+
+    .control {
+      border: solid $border 1px;
+      padding: 2px 16px;
+
+      &.toggle {
+        background-color: $primary;
+      }
+    }
+  }
+
+  .progress_container {
+    .progress {
+      block {
+        border: solid $border 1px;
+
+        &.filled { background-color: $primary; }
+      }
+    }
+  }
+}
