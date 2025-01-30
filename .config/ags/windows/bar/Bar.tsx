@@ -9,11 +9,11 @@ const hyprland = Hyprland.get_default()
 const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
 const workspaces = [
-  { name: 'one /', fn: () => revealMusic.set(!revealMusic.get()) },
-  { name: 'two //', fn: () => {} },
-  { name: '/ three //', fn: () => {} },
-  { name: '/// four /', fn: () => {} },
-  { name: '/// five //', fn: () => {} }
+  { name: 'one /',        action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
+  { name: 'two //',       action: 'none',         fn: () => {} },
+  { name: '/ three //',   action: 'none',         fn: () => {} },
+  { name: '/// four /',   action: 'none',         fn: () => {} },
+  { name: '/// five //',  action: 'none',         fn: () => {} }
 ]
 
 function Workspaces() {
@@ -22,36 +22,74 @@ function Workspaces() {
       name='workspaces'
       cssClasses={['workspaces']}
       spacing={8}>
-      {workspaces.map(({ name, fn }, i) => (
-        <button
-          cssClasses={
-            bind(hyprland, 'focusedWorkspace')
+      {workspaces.map(({ name, action, fn }, i) => {
+        const revealAction = Variable(false)
+
+        return (
+          <button
+            cssClasses={
+              bind(hyprland, 'focusedWorkspace')
               .as(focusedWorkspace => (
                 focusedWorkspace.get_id() === i + 1
                   ? ['workspace', 'active']
                   : ['workspace']
               ))
-          }
-          cursor={Gdk.Cursor.new_from_name('pointer', null)}
-          onButtonPressed={(_, event) => {
-            switch (event.get_button()) {
-              case 1:
-                hyprland.message(`dispatch workspace ${i + 1}`)
-                break
-              case 3:
-                fn()
             }
-          }}>
-          <label
-            cssClasses={['name']}
-            label={name}
-          />
-        </button>
-      ))}
+            cursor={Gdk.Cursor.new_from_name('pointer', null)}
+            onButtonPressed={(_, event) => {
+              switch (event.get_button()) {
+                case 1:
+                  hyprland.message(`dispatch workspace ${i + 1}`)
+                  break
+                case 2:
+                  revealAction.set(!revealAction.get())
+                  break
+                case 3:
+                  fn()
+              }
+            }}>
+            <label
+              cssClasses={['name']}
+              label={
+                revealAction(reveal =>
+                  reveal ? `${name} (${action})` : `${name}`
+                )
+              }
+            />
+          </button>
+        )
+      })}
     </box>
   )
 }
 
+      // {workspaces.map(({ name, fn }, i) => (
+      //   <button
+      //     cssClasses={
+      //       bind(hyprland, 'focusedWorkspace')
+      //         .as(focusedWorkspace => (
+      //           focusedWorkspace.get_id() === i + 1
+      //             ? ['workspace', 'active']
+      //             : ['workspace']
+      //         ))
+      //     }
+      //     cursor={Gdk.Cursor.new_from_name('pointer', null)}
+      //     onButtonPressed={(_, event) => {
+      //       switch (event.get_button()) {
+      //         case 1:
+      //           hyprland.message(`dispatch workspace ${i + 1}`)
+      //           break
+      //         case 3:
+      //           fn()
+      //       }
+      //     }}>
+      //     <label
+      //       cssClasses={['name']}
+      //       label={name}
+      //     />
+      //   </button>
+      // ))}
+      //
 function Left() {
   return (
     <box
