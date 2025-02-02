@@ -1,7 +1,8 @@
-import { revealDesktop } from './windows/desktop/vars'
-import { revealApplauncher } from './windows/launcher/vars'
-import { revealMusic } from './windows/music/vars'
-import { revealPower } from './windows/power/vars'
+import { revealDesktop } from '@windows/desktop/vars'
+import { revealApplauncher } from '@windows/launcher/vars'
+import { revealMusic } from '@windows/music/vars'
+import { revealPower } from '@windows/power/vars'
+import { revealWallpapers } from '@windows/wallpapers/vars'
 
 export default function(req: string, res: (response: any) => void) {
   let args = req.split(':')
@@ -19,6 +20,10 @@ export default function(req: string, res: (response: any) => void) {
         break
       case 'music':
         revealMusic.set(!revealMusic.get())
+        res(`toggled: ${args[1]}`)
+        break
+      case 'wallpapers':
+        revealWallpapers.set(!revealWallpapers.get())
         res(`toggled: ${args[1]}`)
         break
 

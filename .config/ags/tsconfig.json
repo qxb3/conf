@@ -9,6 +9,7 @@
     "jsx": "react-jsx",
     "jsxImportSource": "astal/gtk4",
     "paths": {
+      "@windows/*": ["./windows/*"],
       "@widgets": ["./widgets/index.ts"],
       "@services/*": ["./services/*"]
     }

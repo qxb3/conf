@@ -7,6 +7,7 @@ import { revealDesktop } from '../desktop/vars'
 import { revealApplauncher } from '../launcher/vars'
 import { revealMusic } from '../music/vars'
 import { revealPower } from '../power/vars'
+import { revealWallpapers } from '@windows/wallpapers/vars'
 
 const hyprland = Hyprland.get_default()
 
@@ -15,7 +16,7 @@ const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 const workspaces = [
   { name: 'one /',        action: 'app launcher', fn: () => revealApplauncher.set(!revealApplauncher.get()) },
   { name: 'two //',       action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
-  { name: '/ three //',   action: 'none',         fn: () => {} },
+  { name: '/ three //',   action: 'wallpapers',   fn: () => revealWallpapers.set(!revealWallpapers.get()) },
   { name: '/// four /',   action: 'none',         fn: () => {} },
   { name: '/// five //',  action: 'none',         fn: () => {} }
 ]
@@ -97,9 +98,14 @@ function Center() {
     <box cssClasses={['center']}>
       <stack
         visibleChildName={
-          bind(Variable.derive([bind(revealApplauncher), bind(revealMusic)], (revealApplauncher, revealMusic) => {
+          bind(Variable.derive([
+            bind(revealApplauncher),
+            bind(revealMusic),
+            bind(revealWallpapers)
+          ], (revealApplauncher, revealMusic, revealWallpapers) => {
             if (revealApplauncher) return 'launcher'
             if (revealMusic) return 'music'
+            if (revealWallpapers) return 'wallpapers'
 
             return 'workspaces'
           }))
@@ -110,16 +116,25 @@ function Center() {
           name='launcher'
           cssClasses={['bar_mode']}
           cursor={Gdk.Cursor.new_from_name('pointer', null)}
-          label='App Launcher'
+          label='// App Launcher ///'
           halign={Gtk.Align.CENTER}
           onClicked={() => revealApplauncher.set(false)}
+        />
+
+        <button
+          name='wallpapers'
+          cssClasses={['bar_mode']}
+          cursor={Gdk.Cursor.new_from_name('pointer', null)}
+          label='/ Wallpapers //'
+          halign={Gtk.Align.CENTER}
+          onClicked={() => revealWallpapers.set(false)}
         />
 
         <button
           name='music'
           cssClasses={['bar_mode']}
           cursor={Gdk.Cursor.new_from_name('pointer', null)}
-          label='Music Player'
+          label='Music Player /'
           halign={Gtk.Align.CENTER}
           onClicked={() => revealMusic.set(false)}
         />

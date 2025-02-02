@@ -1,26 +1,7 @@
-$bgh:       #080a12;
-$bg:        #0c101c;
-$bg1:       #0f1424;
-$bg2:       #171f36;
-
-$fgh:       #eae1c8;
-$fg:        #e9e0c5;
-$fg1:       #e3d7b5;
-$fg2:       #dccea3;
-
-$pink:      #e44180;
-$blue:      #0c101c;
-$red:       #e44141;
-$green:     #41e45c;
-$yellow:    #e4e441;
-$orange:    #e47241;
-$purple:    #9b41e4;
-$aqua:      #41e4dc;
-$gray:      #8a867b;
-
-$primary: $pink;
-$secondary: $blue;
-$border: $fg;
+$bg:      #0c101c;
+$fg:      #e9e0c5;
+$primary: #e44180;
+$border:  $fg;
 
 * {
   all: unset;
@@ -32,4 +13,5 @@ $border: $fg;
 @import "./windows/desktop/style.scss";
 @import "./windows/launcher/style.scss";
 @import "./windows/music/style.scss";
+@import "./windows/wallpapers/style.scss";
 @import "./windows/power/style.scss";
