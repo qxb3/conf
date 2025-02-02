@@ -35,13 +35,13 @@ else
 fi
 
 # Init Default Hypr Theme
-if [ ! -e "$LOCAL_STATE/hypr_theme.conf" ]; then
-  ln -s "$HYPR_PATH/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/hypr_theme.conf"
-
-  echo "> Init Hypr"
-else
-  echo "> Init Hypr (Already Exists)"
-fi
+# if [ ! -e "$LOCAL_STATE/hypr_theme.conf" ]; then
+#   ln -s "$HYPR_PATH/themes/$DEFAULT_THEME.conf" "$LOCAL_STATE/hypr_theme.conf"
+#
+#   echo "> Init Hypr"
+# else
+#   echo "> Init Hypr (Already Exists)"
+# fi
 
 # Init Default AGS Theme
 if [ ! -e "$LOCAL_STATE/ags_theme.scss" ]; then
