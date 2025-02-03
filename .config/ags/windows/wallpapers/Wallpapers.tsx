@@ -1,6 +1,7 @@
 import { App, Astal, Gdk, Gtk } from 'astal/gtk4'
-import { exec, GLib, monitorFile, Variable } from 'astal'
+import { exec, execAsync, GLib, monitorFile, Variable } from 'astal'
 
+import { ScrolledWindow } from '@widgets';
 import { revealWallpapers } from './vars'
 
 const wallpapers = Variable(getWallpapers());
@@ -11,33 +12,59 @@ monitorFile(
 )
 
 function getWallpapers() {
-  return exec(`find -L ${GLib.get_user_state_dir()}/retro/wallpapers -iname '*.png'`)
+  return exec(`find -L ${GLib.get_user_state_dir()}/retro/wallpapers/previews -iname '*.png'`)
     .split('\n')
+    .map(path => ({
+      name: path.split('/').pop()!.replace('.png', ''),
+      path
+    }))
 }
 
 function Wallpapers() {
   return (
     <box cssName='wallpapers'>
-      <Gtk.ScrolledWindow
+      <ScrolledWindow
         cssClasses={['list']}
         vscrollbarPolicy={Gtk.PolicyType.NEVER}
         hscrollbarPolicy={Gtk.PolicyType.ALWAYS}
-        hexpand={true}>
+        hexpand={true}
+        onScroll={(self, _, dy) => {
+          const adjustment = self.get_hadjustment()
+          adjustment.set_value(adjustment.get_value() + dy * 50)
+        }}>
         <box
           hexpand={true}
           spacing={8}>
           {wallpapers(wallpapers => wallpapers.map(wallpaper => (
             <button
               cursor={Gdk.Cursor.new_from_name('pointer', null)}
-              onClicked={() => {}}>
+              onClicked={() => {
+                exec(`ln -sf \
+                  ${GLib.get_user_state_dir()}/retro/wallpapers/${wallpaper.name}.png \
+                  ${GLib.get_user_state_dir()}/retro/current_wallpaper`
+                )
+
+                let randomX = Math.random()
+                let randomY = Math.random()
+
+                execAsync(`
+                  swww img \
+                    ${GLib.get_user_state_dir()}/retro/current_wallpaper \
+                    --transition-type "grow" \
+                    --transition-pos ${randomX},${randomY} \
+                    --transition-duration 2`
+                )
+
+                revealWallpapers.set(false)
+              }}>
               <box
-                cssClasses={['wallpaper_img']}
-                setup={() => App.apply_css(`.wallpaper_img { background-image: url("file://${wallpaper}"); }`)}
+                cssClasses={['wallpaper_img', wallpaper.name]}
+                setup={() => App.apply_css(`.wallpaper_img.${wallpaper.name} { background-image: url("file://${wallpaper.path}"); }`)}
               />
             </button>
           )))}
         </box>
-      </Gtk.ScrolledWindow>
+      </ScrolledWindow>
     </box>
   )
 }
