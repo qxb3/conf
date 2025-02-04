@@ -1,7 +1,7 @@
 import ThemeManager from '@services/ThemeManager'
 
-import { App, Astal, Gdk, Gtk } from 'astal/gtk4'
-import { exec, execAsync, readFile } from 'astal'
+import { App, Astal, Gdk, Gtk, hook } from 'astal/gtk4'
+import { exec, readFile } from 'astal'
 
 import { ScrolledWindow } from '@widgets'
 import { revealThemes } from './vars'
@@ -52,11 +52,13 @@ function Themes() {
               }}>
               <box
                 cssClasses={['theme', themeManager.toString(theme.name)]}
-                setup={() => {
-                  App.apply_css(`.theme.${themeManager.toString(theme.name)} { background-color: ${theme.colors.find(color => color.name === 'primary')!.color} }`)
-                  themeManager.connect('notify::changed', () => {
-                    console.log('foo')
-                  })
+                setup={(self) => {
+                  const applyColor = () => {
+                    App.apply_css(`.theme.${themeManager.toString(theme.name)} { background-color: ${theme.colors.find(color => color.name === 'primary')!.color} }`)
+                  }
+
+                  applyColor()
+                  hook(self, themeManager, 'changed', applyColor)
                 }}
               />
             </button>

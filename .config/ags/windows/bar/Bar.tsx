@@ -1,6 +1,7 @@
 import Hyprland from 'gi://AstalHyprland'
+import ThemeManager, { Themes } from '@services/ThemeManager'
 
-import { Astal, Gdk, Gtk } from 'astal/gtk4'
+import { Astal, Gdk, Gtk, hook } from 'astal/gtk4'
 import { bind, Variable } from 'astal'
 
 import { revealDesktop } from '../desktop/vars'
@@ -11,6 +12,7 @@ import { revealWallpapers } from '@windows/wallpapers/vars'
 import { revealThemes } from '@windows/themes/vars'
 
 const hyprland = Hyprland.get_default()
+const themeManager = ThemeManager.get_default()
 
 const time = Variable('').poll(1000, `date +'%I/%M/%p'`)
 
@@ -80,8 +82,24 @@ function Left() {
         <box spacing={8}>
           <image
             cssClasses={['logo']}
-            iconName='arch-symbolic'
             pixelSize={24}
+            setup={(self) => {
+              const applyArch = (theme: Themes) => {
+                switch (theme) {
+                  case Themes.PINK:
+                    self.file = `${SRC}/assets/arch/pink.svg`
+                    break
+                  case Themes.GREEN:
+                    self.file = `${SRC}/assets/arch/green.svg`
+                    break
+                }
+              }
+
+              applyArch(themeManager.currentTheme)
+              hook(self, themeManager, 'changed', () => {
+                applyArch(themeManager.currentTheme)
+              })
+            }}
           />
 
           <label

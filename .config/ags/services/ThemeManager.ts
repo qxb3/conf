@@ -1,5 +1,5 @@
 import { exec, execAsync, monitorFile, readFile } from 'astal'
-import GObject, { GLib, property, register } from 'astal/gobject'
+import GObject, { GLib, property, register, signal } from 'astal/gobject'
 
 export enum Themes {
   PINK,
@@ -22,10 +22,10 @@ export default class ThemeManager extends GObject.Object {
     this.path = `${GLib.get_user_state_dir()}/retro`
     this._currentTheme = this.readTheme()
 
-    monitorFile(`${this.path}/theme_changed`, () => {
+    monitorFile(`${this.path}/theme_name`, () => {
       this._currentTheme = this.readTheme()
       this.emit('changed')
-      this.notify('changed')
+      this.notify('currentTheme')
     })
   }
 
@@ -36,10 +36,14 @@ export default class ThemeManager extends GObject.Object {
 
   set currentTheme(theme: Themes) {
     exec(`bash -c "${SRC}/themes/sync.sh ${this.toString(theme)}"`)
-    execAsync(`notify-send -a 'retro' 'Themes' 'Successfuly changed the theme to ${this.currentTheme.toString().toLowerCase()}. Restart the session to update the gtk theme.'`)
+    execAsync(`notify-send -a 'retro' 'Themes' 'Successfuly changed the theme to ${this.toString(theme)}. Restart the session to update the gtk theme.'`)
+      .catch(() => {})
 
     this._currentTheme = theme
   }
+
+  @signal()
+  declare changed: () => void
 
   get_theme() {
     return this.currentTheme
