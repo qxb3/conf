@@ -2,6 +2,7 @@ import { revealDesktop } from '@windows/desktop/vars'
 import { revealApplauncher } from '@windows/launcher/vars'
 import { revealMusic } from '@windows/music/vars'
 import { revealPower } from '@windows/power/vars'
+import { revealThemes } from '@windows/themes/vars'
 import { revealWallpapers } from '@windows/wallpapers/vars'
 
 export default function(req: string, res: (response: any) => void) {
@@ -24,6 +25,10 @@ export default function(req: string, res: (response: any) => void) {
         break
       case 'wallpapers':
         revealWallpapers.set(!revealWallpapers.get())
+        res(`toggled: ${args[1]}`)
+        break
+      case 'themes':
+        revealThemes.set(!revealThemes.get())
         res(`toggled: ${args[1]}`)
         break
 

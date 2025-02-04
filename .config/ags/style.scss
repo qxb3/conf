@@ -1,7 +1,4 @@
-$bg:      #0c101c;
-$fg:      #e9e0c5;
-$primary: #e44180;
-$border:  $fg;
+@import "ags_theme.scss";
 
 * {
   all: unset;
@@ -14,4 +11,5 @@ $border:  $fg;
 @import "./windows/launcher/style.scss";
 @import "./windows/music/style.scss";
 @import "./windows/wallpapers/style.scss";
+@import "./windows/themes/style.scss";
 @import "./windows/power/style.scss";

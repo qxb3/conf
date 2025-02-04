@@ -7,7 +7,7 @@ import { revealWallpapers } from './vars'
 const wallpapers = Variable(getWallpapers());
 
 monitorFile(
-  `${GLib.get_user_state_dir()}/retro/theme_changed`,
+  `${GLib.get_user_state_dir()}/retro/theme_name`,
   () => wallpapers.set(getWallpapers())
 )
 

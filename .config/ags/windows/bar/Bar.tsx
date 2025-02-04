@@ -8,6 +8,7 @@ import { revealApplauncher } from '../launcher/vars'
 import { revealMusic } from '../music/vars'
 import { revealPower } from '../power/vars'
 import { revealWallpapers } from '@windows/wallpapers/vars'
+import { revealThemes } from '@windows/themes/vars'
 
 const hyprland = Hyprland.get_default()
 
@@ -17,7 +18,7 @@ const workspaces = [
   { name: 'one /',        action: 'app launcher', fn: () => revealApplauncher.set(!revealApplauncher.get()) },
   { name: 'two //',       action: 'music player', fn: () => revealMusic.set(!revealMusic.get()) },
   { name: '/ three //',   action: 'wallpapers',   fn: () => revealWallpapers.set(!revealWallpapers.get()) },
-  { name: '/// four /',   action: 'none',         fn: () => {} },
+  { name: '/// four /',   action: 'themes',       fn: () => revealThemes.set(!revealThemes.get()) },
   { name: '/// five //',  action: 'none',         fn: () => {} }
 ]
 
@@ -101,11 +102,13 @@ function Center() {
           bind(Variable.derive([
             bind(revealApplauncher),
             bind(revealMusic),
-            bind(revealWallpapers)
-          ], (revealApplauncher, revealMusic, revealWallpapers) => {
+            bind(revealWallpapers),
+            bind(revealThemes)
+          ], (revealApplauncher, revealMusic, revealWallpapers, revealThemes) => {
             if (revealApplauncher) return 'launcher'
             if (revealMusic) return 'music'
             if (revealWallpapers) return 'wallpapers'
+            if (revealThemes) return 'themes'
 
             return 'workspaces'
           }))
@@ -137,6 +140,15 @@ function Center() {
           label='Music Player /'
           halign={Gtk.Align.CENTER}
           onClicked={() => revealMusic.set(false)}
+        />
+
+        <button
+          name='themes'
+          cssClasses={['bar_mode']}
+          cursor={Gdk.Cursor.new_from_name('pointer', null)}
+          label='/ Themes //'
+          halign={Gtk.Align.CENTER}
+          onClicked={() => revealThemes.set(false)}
         />
       </stack>
     </box>

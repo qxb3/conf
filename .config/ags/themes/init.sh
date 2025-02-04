@@ -16,8 +16,8 @@ LOCAL_STATE="$HOME/.local/state/retro"
 if [ ! -e "$LOCAL_STATE" ]; then
   mkdir "$LOCAL_STATE"
 
-  # Keep track if themed_changed file
-  echo "0" > "$LOCAL_STATE/theme_changed"
+  # For theme name tracking
+  echo "$DEFAULT_THEME" > "$LOCAL_STATE/theme_name"
 
   echo "> Creating $LOCAL_STATE"
 else
