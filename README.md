@@ -14,6 +14,8 @@
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/2.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/3.png" />
   <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/4.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/5.png" />
+  <img align="center" width="49%" src="https://raw.githubusercontent.com/qxb3/conf/retro/repo/6.png" />
 </p>
 
 <br>
