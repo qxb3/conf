@@ -1,3 +1,4 @@
+import { revealCalendar } from '@windows/calendar/vars'
 import { revealDesktop } from '@windows/desktop/vars'
 import { revealApplauncher } from '@windows/launcher/vars'
 import { revealMusic } from '@windows/music/vars'
@@ -27,6 +28,9 @@ export default function(req: string, res: (response: any) => void) {
         revealThemes.set(!revealThemes.get())
         return res(`toggled: ${args[1]}`)
 
+      case 'calendar':
+        revealCalendar.set(!revealCalendar.get())
+        return res(`toggled ${args[1]}`)
       case 'power':
         revealPower.set(!revealPower.get())
         return res(`toggled: ${args[1]}`)

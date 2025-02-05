@@ -10,6 +10,7 @@ import { revealMusic } from '../music/vars'
 import { revealPower } from '../power/vars'
 import { revealWallpapers } from '@windows/wallpapers/vars'
 import { revealThemes } from '@windows/themes/vars'
+import { revealCalendar } from '@windows/calendar/vars'
 
 const hyprland = Hyprland.get_default()
 const themeManager = ThemeManager.get_default()
@@ -178,9 +179,15 @@ function Right() {
     <box
       cssClasses={['right']}
       spacing={12}>
-      <label label='//' />
-      <label label={time()} />
-      <label label='/' />
+      <button
+        cursor={Gdk.Cursor.new_from_name('pointer', null)}
+        onClicked={() => revealCalendar.set(!revealCalendar.get())}>
+        <box>
+          <label label='//' />
+          <label label={time()} />
+          <label label='/' />
+        </box>
+      </button>
 
       <button
         cssClasses={['power_btn']}

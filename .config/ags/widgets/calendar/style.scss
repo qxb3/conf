@@ -1,0 +1,21 @@
+.calendar_widget {
+  font-size: 15px;
+
+  & .month_year { font-size: 17px; }
+  & .control { font-size: 17px; }
+
+  /* & .not_incurrent { */
+  /*   color: $fg; */
+  /* } */
+
+  & .today {
+    background-color: $primary;
+    color: $bg;
+    border-radius: 8px;
+  }
+
+  & .divider {
+    background-color: $border;
+    min-height: 1px;
+  }
+}

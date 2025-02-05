@@ -2,7 +2,7 @@
   "name": "astal-shell",
   "scripts": {
     "start": "ags run --gtk4",
-    "dev": "nodemon -e tsx,ts,scss --exec 'npm run start'"
+    "dev": "nodemon -e tsx,ts --exec 'npm run start'"
   },
   "dependencies": {
     "astal": "/usr/share/astal/gjs"

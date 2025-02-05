@@ -6,10 +6,15 @@
   color: $fg;
 }
 
+// Widgets
+@import "./widgets/calendar/style.scss";
+
+// Windows
 @import "./windows/bar/style.scss";
 @import "./windows/desktop/style.scss";
 @import "./windows/launcher/style.scss";
 @import "./windows/music/style.scss";
 @import "./windows/wallpapers/style.scss";
 @import "./windows/themes/style.scss";
+@import "./windows/calendar/style.scss";
 @import "./windows/power/style.scss";

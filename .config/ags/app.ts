@@ -7,6 +7,7 @@ import AppLauncher from '@windows/launcher/AppLauncher'
 import Music from '@windows/music/Music'
 import Wallpapers from '@windows/wallpapers/Wallpapers'
 import Themes from '@windows/themes/Themes'
+import Calendar from '@windows/calendar/Calendar'
 import Power from '@windows/power/Power'
 
 import requestHandler from './requestHandler'
@@ -23,6 +24,7 @@ App.start({
     Music(monitor)
     Wallpapers(monitor)
     Themes(monitor)
+    Calendar(monitor)
     Power(monitor)
   },
   requestHandler
