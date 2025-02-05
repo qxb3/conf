@@ -1,7 +1,7 @@
 import Mpris from 'gi://AstalMpris'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
-import { bind } from 'astal'
+import { bind, GLib } from 'astal'
 import { revealMusic } from './vars'
 import Pango from 'gi://Pango?version=1.0'
 
@@ -13,7 +13,7 @@ function CoverArt({ isAvailable }: { isAvailable: boolean }) {
       cssClasses={['cover_art']}
       file={
         bind(spotify, 'coverArt')
-          .as(coverArt => isAvailable ? coverArt : `${SRC}/assets/no_music.png`)
+          .as(coverArt => isAvailable ? coverArt : `${GLib.get_user_state_dir()}/retro/no_music`)
       }
     />
   )

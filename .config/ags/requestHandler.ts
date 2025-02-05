@@ -12,35 +12,28 @@ export default function(req: string, res: (response: any) => void) {
     switch (args[1]) {
       case 'desktop':
         revealDesktop.set(!revealDesktop.get())
-        res(`toggled ${args[1]}`)
-        break
+        return res(`toggled ${args[1]}`)
 
       case 'launcher':
         revealApplauncher.set(!revealApplauncher.get())
-        res(`toggled ${args[1]}`)
-        break
+        return res(`toggled ${args[1]}`)
       case 'music':
         revealMusic.set(!revealMusic.get())
-        res(`toggled: ${args[1]}`)
-        break
+        return res(`toggled: ${args[1]}`)
       case 'wallpapers':
         revealWallpapers.set(!revealWallpapers.get())
-        res(`toggled: ${args[1]}`)
-        break
+        return res(`toggled: ${args[1]}`)
       case 'themes':
         revealThemes.set(!revealThemes.get())
-        res(`toggled: ${args[1]}`)
-        break
+        return res(`toggled: ${args[1]}`)
 
       case 'power':
         revealPower.set(!revealPower.get())
-        res(`toggled: ${args[1]}`)
-        break
+        return res(`toggled: ${args[1]}`)
       default:
-        res(`unknown window: ${args[1]}`)
-        break
+        return res(`unknown window: ${args[1]}`)
     }
   }
 
-  res(`unknown command: ${args[0]}`)
+  return res(`unknown command: ${args[0]}`)
 }
