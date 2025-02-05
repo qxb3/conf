@@ -3,13 +3,16 @@ import Mpris from 'gi://AstalMpris'
 import Brightness from '@services/Brightness'
 
 import { Astal, Gdk, Gtk } from 'astal/gtk4'
-import { bind, exec, GLib } from 'astal'
+import { bind, exec, GLib, Variable } from 'astal'
 
 import { revealDesktop } from './vars'
 
 const audio = Wp.get_default()!.get_audio()!
 const spotify = Mpris.Player.new('spotify')
 const brightness = Brightness.get_default()
+
+const uptime = Variable(exec(`bash -c "uptime -p | sed 's/^up //; s/,.*//'"`))
+  .poll(5000, exec(`bash -c "uptime -p | sed 's/^up //; s/,.*//'"`))
 
 function Me() {
   return (
@@ -32,7 +35,7 @@ function Me() {
 
         <label
           cssClasses={['up']}
-          label={`/ up ${exec(`bash -c "uptime -p | sed 's/^up //; s/,.*//'"`)}`}
+          label={uptime(up => `up ${up}`)}
           xalign={0}
         />
       </box>
