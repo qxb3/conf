@@ -41,9 +41,9 @@
     </h2>
   </summary>
 
-  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/retro/repo/1.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/retro/repo/2.png" />
   <br><br>
-  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/retro/repo/3.png" />
+  <img align="center" width="100%" src="https://raw.githubusercontent.com/qxb3/gruvbox.hypr/retro/repo/4.png" />
 </details>
 
 <details open>
