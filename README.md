@@ -33,6 +33,11 @@ cd conf
 cp -r font/* ~/.local/share/fonts
 cp -r .config/* ~/.config
 cp -r .scripts ~/ # Optional
+
+# building ags
+cd ~/.config/ags
+ags bundle app.ts yume
+
 # Restart your pc
 ```
 
