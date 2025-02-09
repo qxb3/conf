@@ -3,7 +3,8 @@ import GObject, { GLib, property, register, signal } from 'astal/gobject'
 
 export enum Themes {
   PINK,
-  GREEN
+  GREEN,
+  BLACK_WHITE
 }
 
 export interface Theme {
@@ -59,6 +60,8 @@ export default class ThemeManager extends GObject.Object {
         return 'pink'
       case Themes.GREEN:
         return 'green'
+      case Themes.BLACK_WHITE:
+        return 'black_white'
     }
   }
 
@@ -68,6 +71,8 @@ export default class ThemeManager extends GObject.Object {
         return Themes.PINK
       case 'green':
         return Themes.GREEN
+      case 'black_white':
+        return Themes.BLACK_WHITE
     }
 
     throw Error('ThemeManager: unknown theme')

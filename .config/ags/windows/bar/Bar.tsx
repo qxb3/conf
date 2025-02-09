@@ -86,14 +86,7 @@ function Left() {
             pixelSize={24}
             setup={(self) => {
               const applyArch = (theme: Themes) => {
-                switch (theme) {
-                  case Themes.PINK:
-                    self.file = `${SRC}/assets/arch/pink.svg`
-                    break
-                  case Themes.GREEN:
-                    self.file = `${SRC}/assets/arch/green.svg`
-                    break
-                }
+                self.file = `${SRC}/assets/arch/${themeManager.toString(theme)}.svg`
               }
 
               applyArch(themeManager.currentTheme)

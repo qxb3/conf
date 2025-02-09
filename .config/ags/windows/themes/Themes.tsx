@@ -29,6 +29,8 @@ function Themes() {
       })
     }))
 
+  console.log(themes)
+
   return (
     <box cssName='themes'>
       <ScrolledWindow

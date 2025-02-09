@@ -5,10 +5,6 @@ ZVM_VI_ESCAPE_BINDKEY=qq
 ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
 ZVM_VI_HIGHLIGHT_FOREGROUND=#FFFFFF
 
-if [ -f /usr/bin/fastfetch ]; then
-  fastfetch
-fi
-
 plugins=(
   git
   sudo

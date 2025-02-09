@@ -1,0 +1,36 @@
+// black & white
+
+$bg:      #000000;
+$fg:      #ffffff;
+$primary: #ffffff;
+$border:  $fg;
+
+bar {
+  .center {
+    .workspaces {
+      .workspace {
+        &.active {
+          & label {
+            color: $bg;
+          }
+        }
+      }
+    }
+  }
+
+  .right {
+    .power_btn {
+      & label {
+        color: $bg;
+      }
+    }
+  }
+}
+
+music {
+  .meta {
+    .title {
+      color: $bg;
+    }
+  }
+}
