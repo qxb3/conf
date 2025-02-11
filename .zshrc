@@ -1,5 +1,5 @@
 ZSH=~/.oh-my-zsh
-ZSH_THEME='robbyrussell'
+ZSH_THEME='lambda'
 
 ZVM_VI_ESCAPE_BINDKEY=qq
 ZVM_VI_HIGHLIGHT_BACKGROUND=#262626
