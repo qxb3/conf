@@ -1,0 +1,39 @@
+#!/bin/bash
+
+project_paths=$(find "$HOME/Dev" -maxdepth 2 -type d | awk -v home="$HOME" '{ gsub(home "/Dev", home "/Dev"); print }')
+custom_paths=(
+  "$HOME/.config"
+  "$HOME/.config/hypr"
+  "$HOME/.config/rofi"
+  "$HOME/.config/eww"
+  "$HOME/.config/ags"
+  "$HOME/.config/swww"
+  "$HOME/.config/swaylock"
+  "$HOME/.config/swappy"
+  "$HOME/.config/nvim"
+  "$HOME/.config/kitty"
+  "$HOME/.config/neofetch"
+  "$HOME/.config/cava"
+  "$HOME/Downloads"
+  "$HOME/Documents"
+  "$HOME/Pictures"
+  "$HOME/Videos"
+)
+
+paths="$project_paths\n"
+
+for path in "${custom_paths[@]}"; do
+  paths+="$path\n"
+done
+
+result=$( \
+  echo -e "$paths" | \
+  fzf \
+  --border=sharp \
+  --margin 10% \
+  --preview="eza --tree --level=4 --color=always {} | head -200" \
+  --prompt="~ " \
+  --pointer="*"
+)
+
+echo "$result"
