@@ -93,11 +93,7 @@ require('packer').startup(function(use)
   use 'echasnovski/mini.indentscope'        -- Highlight indent scope
   use 'kyazdani42/nvim-web-devicons'        -- Dev icons with color
   use 'xiyaowong/transparent.nvim'          -- Remove Background
-  use 'shaunsingh/nord.nvim'                -- Nord Colorscheme
-  use 'ellisonleao/gruvbox.nvim'            -- Gruvbox Colorscheme
-  use 'nyoom-engineering/oxocarbon.nvim'    -- Oxocarbon Colorscheme
-  use 'neanias/everforest-nvim'             -- Everforest Colorscheme
-  use 'rebelot/kanagawa.nvim'               -- Kanagawa Colorscheme
+  use 'metalelf0/base16-black-metal-scheme' -- Base16 Black Metal Colorscheme
 
   ------------------------------------------------------------
   -- Useful Plugins                                         --
@@ -120,7 +116,3 @@ end)
 -- Setups
 require('renamer').setup()
 require('presence').setup()
-
--- Minimap.nvim
--- vim.g.minimap_auto_start = 1
--- vim.g.minimap_git_colors = 1

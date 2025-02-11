@@ -48,7 +48,8 @@ option.updatetime = 4000
 -- Colorscheme                                            --
 ------------------------------------------------------------
 
-dofile(vim.fn.expand("~/.local/state/theme/nvim_theme.lua"))
+vim.cmd('colorscheme base16-black-metal-gorgoroth')
+vim.api.nvim_set_hl(0, 'WinSeparator', { bg = 'None', fg = '#000000' })
 
 ------------------------------------------------------------
 -- Vim Remaps                                             --
