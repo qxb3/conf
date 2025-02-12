@@ -27,7 +27,7 @@ function Bar() {
                   ))
               }
               cursor={Gdk.Cursor.new_from_name('pointer', null)}
-              onClicked={() => hyprland.message_async(`dispatch workspace ${i + 1}`)}>
+              onClicked={() => hyprland.message(`dispatch workspace ${i + 1}`)}>
               {i + 1}
             </button>
           ))}
