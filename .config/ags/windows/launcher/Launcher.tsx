@@ -69,29 +69,34 @@ function Launcher() {
         </box>
       </Gtk.ScrolledWindow>
 
-      <entry
-        cssClasses={['input']}
-        placeholderText='search'
-        hexpand={true}
-        onNotifyText={({ text }) => {
-          queriedApps.set(applications.fuzzy_query(text))
-          selectedApp.set(queriedApps.get()[0])
-          selectedIndex.set(0)
-        }}
-        setup={(self) => {
-          hook(self, revealLauncher, () => {
-            if (!revealLauncher.get()) {
-              self.text = ''
+      <box spacing={1}>
+        <label
+          label='λ ~/'
+        />
 
-              queriedApps.set(applications.fuzzy_query(''))
-              selectedApp.set(queriedApps.get()[0])
-              selectedIndex.set(0)
-            } else {
-              self.grab_focus()
-            }
-          })
-        }}
-      />
+        <entry
+          cssClasses={['input']}
+          hexpand={true}
+          onNotifyText={({ text }) => {
+            queriedApps.set(applications.fuzzy_query(text))
+            selectedApp.set(queriedApps.get()[0])
+            selectedIndex.set(0)
+          }}
+          setup={(self) => {
+            hook(self, revealLauncher, () => {
+              if (!revealLauncher.get()) {
+                self.text = ''
+
+                queriedApps.set(applications.fuzzy_query(''))
+                selectedApp.set(queriedApps.get()[0])
+                selectedIndex.set(0)
+              } else {
+                self.grab_focus()
+              }
+            })
+          }}
+        />
+      </box>
     </box>
   )
 }

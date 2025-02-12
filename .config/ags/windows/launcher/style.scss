@@ -3,6 +3,7 @@ launcher {
   min-width: 300px;
   min-height: 220px;
   margin: 10px;
+  padding: 2px;
   font-size: 16px;
 
   .list {
@@ -17,8 +18,9 @@ launcher {
   }
 
   .input {
+    padding: 4px 0 4px 4px;
+
     * {
-      color: $primary;
       color: 16px;
     }
   }
