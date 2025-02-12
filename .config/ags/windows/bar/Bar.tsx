@@ -37,7 +37,7 @@ function Bar() {
           cssClasses={['active_window']}
           label={
             bind(hyprland, 'focusedClient')
-              .as(focusedClient => focusedClient.get_initial_title())
+              .as(focusedClient => focusedClient?.get_initial_title() ?? 'None')
               .as(title => `* ${title}`)
           }
         />
