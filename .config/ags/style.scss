@@ -1,0 +1,11 @@
+$bg: #000000;
+$fg: #888888;
+$primary: #9B8D7F;
+
+* {
+  all: unset;
+  font-family: "Iosevka Nerd Font Mono";
+  color: $fg;
+}
+
+@import "./windows/bar/style.scss";

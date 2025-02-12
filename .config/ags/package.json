@@ -1,0 +1,13 @@
+{
+  "name": "mono",
+  "scripts": {
+    "start": "ags run --gtk4",
+    "dev": "nodemon --ext tsx,ts,scss --exec 'npm run start'"
+  },
+  "dependencies": {
+    "astal": "/usr/share/astal/gjs"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
