@@ -1,0 +1,10 @@
+music {
+  background-color: $bg;
+  padding: 1rem;
+  font-size: 16px;
+
+  .cover_art {
+    min-width: 150px;
+    min-height: 150px;
+  }
+}
