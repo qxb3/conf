@@ -1,0 +1,22 @@
+launcher {
+  background-color: $bg;
+  min-width: 300px;
+  min-height: 220px;
+  margin: 10px;
+  font-size: 15px;
+
+  .list {
+    .app.selected {
+      * { color: $primary; }
+    }
+  }
+
+  .no_result {
+    margin-top: 90px;
+    color: $primary;
+  }
+
+  .input {
+    * { color: $primary; }
+  }
+}
