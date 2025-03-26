@@ -108,11 +108,12 @@ require('packer').startup(function(use)
   -- Other Plugins                                          --
   ------------------------------------------------------------
   use 'leafOfTree/vim-svelte-plugin'        -- Svelte specific plugin
-  use 'andweeb/presence.nvim'               -- Discord Rich Presence
+  use 'vyfor/cord.nvim'                     -- Discord Presence plugin
   use 'akinsho/toggleterm.nvim'             -- Floaterm
   use 'ThePrimeagen/vim-be-good'            -- A game to practice vim-motion
 end)
 
 -- Setups
 require('renamer').setup()
-require('presence').setup()
+
+require('cord').setup()
