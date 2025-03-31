@@ -114,4 +114,4 @@ end)
 
 -- Setups
 require('renamer').setup()
-require('presence').setup()
+require('cord').setup()
