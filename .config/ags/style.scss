@@ -1,20 +1,13 @@
-// https://gitlab.gnome.org/GNOME/gtk/-/blob/gtk-3-24/gtk/theme/Adwaita/_colors-public.scss
-$fg-color: #{"@theme_fg_color"};
-$bg-color: #{"@theme_bg_color"};
+$fg: #000000;
 
-window.Bar {
-    background: transparent;
-    color: $fg-color;
-    font-weight: bold;
-
-    >centerbox {
-        background: $bg-color;
-        border-radius: 10px;
-        margin: 8px;
-    }
-
-    button {
-        border-radius: 8px;
-        margin: 2px;
-    }
+* {
+  all: unset;
+  font-family: "Kosugi Maru";
+  font-size: 14px;
+  font-weight: 400;
+  color: $fg;
 }
+
+@import "./windows/top_bar/style.scss";
+@import "./windows/side_bar/style.scss";
+@import "./windows/bottom_side/style.scss";
