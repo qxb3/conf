@@ -66,6 +66,12 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { silent = true })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { silent = true })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { silent = true })
 
+-- Resize split
+vim.keymap.set('n', '<S-H>', ':vertical resize +3<CR>', { silent = true })
+vim.keymap.set('n', '<S-L>', ':vertical resize -3<CR>', { silent = true })
+vim.keymap.set('n', '<S-K>', ':resize -2<CR>', { silent = true })
+vim.keymap.set('n', '<S-J>', ':resize +2<CR>', { silent = true })
+
 vim.keymap.set('n', '<leader>so', ':source %<CR>')
 vim.keymap.set('n', '<leader>nh', ':nohl<CR>')
 vim.keymap.set('v', '<leader>y', '"+y')
