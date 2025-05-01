@@ -1,3 +1,9 @@
+local lsp = require('lspconfig')
+
+lsp.zls.setup({
+  cmd = { '/usr/bin/zls' }
+})
+
 -- Diagnostic Indicators
 vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
 vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
@@ -8,7 +14,7 @@ local zero = require('lsp-zero').preset({
   name = 'minimal',
   set_lsp_keymaps = true,
   manage_nvim_cmp = true,
-  suggest_lsp_servers = true
+  suggest_lsp_servers = true,
 })
 
 zero.on_attach(function(_, bufnr)
