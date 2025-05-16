@@ -6,6 +6,7 @@ import NotifdService from 'gi://AstalNotifd'
 
 import { Gtk } from 'astal/gtk3'
 import { bind, Binding, Variable } from 'astal'
+import { time } from '@windows/bar/menu/vars'
 
 export interface ButtonProps {
   name: string,
@@ -44,45 +45,22 @@ function NetworkButton() {
       valign={Gtk.Align.CENTER}>
       {bind(network, 'primary').as(primary => (
         <stack shown={primary.toString()}>
-          {/* Wired */}
           <box name={NetworkService.Primary.WIRED.toString()}>
+          {/*
+            Temporarily disables this thing since my new laptop doesnt have wired.
             <ButtonIcon
               name='WIRED'
               className='icon'
-              icon={bind(network.get_wired()!, 'state').as(state => {
-                switch (state) {
-                  case  NetworkService.DeviceState.ACTIVATED:
-                    return 'network-wired-symbolic'
-                  case  NetworkService.DeviceState.DISCONNECTED:
-                    return 'network-wired-disconnected-symbolic'
-                  case  NetworkService.DeviceState.UNKNOWN |
-                    NetworkService.DeviceState.UNAVAILABLE:
-                    return 'network-wired-no-route-symbolic'
-                  default:
-                    return 'network-wireless-offline-symbolic'
-                }
-              })}
+              icon={bind(network.get_wired()!, 'iconName')}
             />
+            */}
           </box>
 
-          {/* Wifi */}
           <box name={NetworkService.Primary.WIFI.toString()}>
             <ButtonIcon
               name='WIFI'
               className='icon'
-              icon={bind(network.get_wifi()!, 'state').as(state => {
-                switch (state) {
-                  case  NetworkService.DeviceState.ACTIVATED:
-                    return 'network-wireless-symbolic'
-                  case  NetworkService.DeviceState.UNKNOWN |
-                    NetworkService.DeviceState.UNAVAILABLE:
-                    return 'network-wireless-offline-symbolic'
-                  case  NetworkService.DeviceState.DISCONNECTED:
-                    return 'network-wireless-no-route-symbolic'
-                  default:
-                    return 'network-wireless-offline-symbolic'
-                }
-              })}
+              icon={bind(network.get_wifi()!, 'iconName')}
             />
           </box>
         </stack>
@@ -90,6 +68,50 @@ function NetworkButton() {
     </button>
   )
 }
+      // {bind(network, 'primary').as(primary => (
+      //   <stack shown={primary.toString()}>
+      //     {/* Wired */}
+      //     <box name={NetworkService.Primary.WIRED.toString()}>
+      //       <ButtonIcon
+      //         name='WIRED'
+      //         className='icon'
+      //         icon={bind(network.get_wired()!, 'state').as(state => {
+      //           switch (state) {
+      //             case  NetworkService.DeviceState.ACTIVATED:
+      //               return 'network-wired-symbolic'
+      //             case  NetworkService.DeviceState.DISCONNECTED:
+      //               return 'network-wired-disconnected-symbolic'
+      //             case  NetworkService.DeviceState.UNKNOWN |
+      //               NetworkService.DeviceState.UNAVAILABLE:
+      //               return 'network-wired-no-route-symbolic'
+      //             default:
+      //               return 'network-wireless-offline-symbolic'
+      //           }
+      //         })}
+      //       />
+      //     </box>
+      //
+      //     {/* Wifi */}
+      //     <box name={NetworkService.Primary.WIFI.toString()}>
+      //       <ButtonIcon
+      //         name='WIFI'
+      //         className='icon'
+      //         icon={bind(network.get_wifi()!, 'state').as(state => {
+      //           switch (state) {
+      //             case  NetworkService.DeviceState.ACTIVATED:
+      //               return 'network-wireless-symbolic'
+      //             case  NetworkService.DeviceState.UNKNOWN |
+      //               NetworkService.DeviceState.UNAVAILABLE:
+      //               return 'network-wireless-offline-symbolic'
+      //             case  NetworkService.DeviceState.DISCONNECTED:
+      //               return 'network-wireless-no-route-symbolic'
+      //             default:
+      //               return 'network-wireless-offline-symbolic'
+      //           }
+      //         })}
+      //       />
+      //     </box>
+      //   </stack>
 
 function BluetoothButton() {
   return (
