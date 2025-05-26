@@ -2,7 +2,6 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Quickshell
-import QtQuick
 
 Singleton {
   property string bg: "#4B3D33"

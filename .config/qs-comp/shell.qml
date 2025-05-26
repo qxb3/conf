@@ -1,9 +1,7 @@
 import Quickshell
 
-import "./windows/leftbar"
-import "./windows/sidebar"
+import "./windows/bar"
 
 ShellRoot {
-  Leftbar {}
-  // Sidebar {}
+  Bar {}
 }

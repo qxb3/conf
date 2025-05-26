@@ -7,6 +7,8 @@ import QtQuick.Layouts
 import "root:/common"
 import "root:/common/widgets"
 
+import "./topbar"
+
 Scope {
   Variants {
     model: Quickshell.screens
