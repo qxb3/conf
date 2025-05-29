@@ -93,6 +93,8 @@ RowLayout {
       }
 
       onPressed: () => {
+        GlobalState.isNotifCenterOpen = !GlobalState.isNotifCenterOpen
+
         activeWindowContent.y = 0
         activeWindowContent.scale = 0.95
         scaleTimer.running = true

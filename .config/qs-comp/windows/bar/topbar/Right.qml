@@ -89,6 +89,8 @@ RowLayout {
       }
 
       onPressed: () => {
+        GlobalState.isCalendarOpen = !GlobalState.isCalendarOpen
+
         timeContent.y = 0
         timeContent.scale = 0.95
         scaleTimer.running = true

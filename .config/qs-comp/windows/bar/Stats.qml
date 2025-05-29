@@ -8,8 +8,8 @@ import "root:/common/widgets"
 
 Item {
   id: stats
-  Layout.fillWidth: true
-  Layout.preferredHeight: statsContent.height
+  implicitWidth: parent.width
+  implicitHeight: statsContent.height
 
   Rectangle {
     anchors.fill: parent
@@ -62,7 +62,6 @@ Item {
       id: cpu
       Layout.leftMargin: 28
       text: "Cpu 0%"
-      font.pixelSize: 30
 
       Process {
         id: cpuProc
@@ -93,7 +92,6 @@ Item {
       Layout.leftMargin: 28
       Layout.bottomMargin: 28
       text: "Mem"
-      font.pixelSize: 30
 
       Process {
         id: memProc
