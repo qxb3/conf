@@ -7,7 +7,7 @@ Text {
   renderType: Text.NativeRendering
   font.hintingPreference: Font.PreferFullHinting
   verticalAlignment: Text.AlignVCenter
-  font.family: Settings.font.family
-  font.pixelSize: Settings.font.size
-  color: Settings.colors.fg
+  font.family: "Tiny5"
+  font.pixelSize: 30
+  color: Colors.fg
 }
