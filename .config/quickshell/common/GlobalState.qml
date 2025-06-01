@@ -7,6 +7,7 @@ import Quickshell.Io
 Singleton {
   id: root
 
+  property bool isGaming: false
   property bool isLeftbarOpen: false
   property bool isNotifCenterOpen: false
   property bool isCalendarOpen: false
@@ -14,7 +15,8 @@ Singleton {
   IpcHandler {
     target: "state"
 
-    function toggleLeftbar(): void {
+    function toggleGaming(): void {
+      root.isGaming = !root.isGaming
       root.isLeftbarOpen = !root.isLeftbarOpen
     }
   }

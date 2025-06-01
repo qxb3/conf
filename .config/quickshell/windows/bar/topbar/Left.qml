@@ -19,7 +19,7 @@ Item {
     anchors.bottom: work1.bottom
     anchors.margins: -4
     color: Colors.border
-    state: "work" + Hyprland.focusedWorkspace.id
+    state: "work" + Hyprland.focusedWorkspace?.id ?? ''
 
     states: [
       State {

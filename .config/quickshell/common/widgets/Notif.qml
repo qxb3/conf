@@ -71,6 +71,7 @@ Item {
         sourceComponent: StyledText {
           text: "    " + summary
           font.pixelSize: 25
+          elide: Text.ElideRight
         }
       }
 
@@ -79,6 +80,7 @@ Item {
         sourceComponent: StyledText {
           text: "    " + body
           font.pixelSize: 25
+          elide: Text.ElideRight
         }
       }
 

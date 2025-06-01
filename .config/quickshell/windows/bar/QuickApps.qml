@@ -26,24 +26,33 @@ Item {
       id: termApp
       Layout.alignment: Qt.AlignCenter
       icon: `file:///${Quickshell.shellRoot}/assets/skill1.png`
+      process: Process {
+        command: ["sh", "-c", "quickshell ipc call game attack"]
+        running: true
+      }
     }
 
     QuickApp {
       Layout.alignment: Qt.AlignCenter
       icon: `file:///${Quickshell.shellRoot}/assets/skill2.png`
-    }
-
-    QuickApp {
-      Layout.alignment: Qt.AlignCenter
-      icon: `file:///${Quickshell.shellRoot}/assets/skill3.png`
-    }
-
-    QuickApp {
-      Layout.alignment: Qt.AlignCenter
       Layout.bottomMargin: 20
-      icon: `file:///${Quickshell.shellRoot}/assets/skill4.png`
-      func: () => {
+      process: Process {
+        command: ["sh", "-c", "quickshell ipc call game shield"]
+        running: true
       }
     }
+
+    // QuickApp {
+    //   Layout.alignment: Qt.AlignCenter
+    //   icon: `file:///${Quickshell.shellRoot}/assets/skill3.png`
+    // }
+    //
+    // QuickApp {
+    //   Layout.alignment: Qt.AlignCenter
+    //   Layout.bottomMargin: 20
+    //   icon: `file:///${Quickshell.shellRoot}/assets/skill4.png`
+    //   func: () => {
+    //   }
+    // }
   }
 }
