@@ -9,7 +9,7 @@ plugins=(
   git
   sudo
   zsh-256color
-  zsh-autosuggestions
+  #zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-vi-mode
 )
