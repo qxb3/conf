@@ -59,4 +59,9 @@ export PATH=./node_modules/.bin:./vendor/bin:$PATH
 export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"
 export PATH=$PATH:/opt/android-sdk/platform-tools
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
