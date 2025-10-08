@@ -1,9 +1,3 @@
-local lsp = require('lspconfig')
-
-lsp.zls.setup({
-  cmd = { '/usr/bin/zls' }
-})
-
 -- Diagnostic Indicators
 vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
 vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
