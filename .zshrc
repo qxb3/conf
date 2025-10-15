@@ -31,6 +31,11 @@ function in {
   fi
 }
 
+# Silence a command
+function slc {
+  setsid "$@" > /dev/null 2>&1 &
+}
+
 # Aliases
 alias l='eza --icons=auto' # long list
 alias ls='eza --icons=auto' # short list

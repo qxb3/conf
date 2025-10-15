@@ -6,7 +6,7 @@ require('telescope').setup({
     file_ignore_patterns = {
       'node_modules', 'dist', 'static',
       'packer_compiled.lua', 'nvim-tree.lua',
-      'target', 'CMakeFiles'
+      'target', 'CMakeFiles', '@girs'
     },
     mappings = {
       n = {
