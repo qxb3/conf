@@ -13,7 +13,6 @@ RowLayout {
   CText {
     id: timeText
     text: "00:00"
-    anchors.centerIn: parent
 
     Process {
       id: timeProc

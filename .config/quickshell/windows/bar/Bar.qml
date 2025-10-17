@@ -11,8 +11,6 @@ Scope {
     model: Quickshell.screens
 
     PanelWindow {
-      id: bar
-
       required property ShellScreen modelData
       screen: modelData
 
