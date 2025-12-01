@@ -6,7 +6,7 @@ require('neo-tree').setup({
     highlight = "NeoTreeModified",
   },
   window = {
-    position = 'float',
+    position = 'bottom',
     mappings = {
       ['<CR>'] = 'open_vsplit',
       ['d'] = 'add_directory',

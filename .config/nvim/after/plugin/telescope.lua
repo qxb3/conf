@@ -4,9 +4,9 @@ local actions = require("telescope.actions")
 require('telescope').setup({
   defaults = {
     file_ignore_patterns = {
-      'node_modules', 'dist', 'build', 'static',
+      'node_modules', 'dist', 'static',
       'packer_compiled.lua', 'nvim-tree.lua',
-      'target', 'CMakeFiles'
+      'target', 'CMakeFiles', '@girs'
     },
     mappings = {
       n = {
