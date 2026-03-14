@@ -14,14 +14,14 @@ RowLayout {
   anchors.centerIn: parent
   spacing: 12
   clip: true
-  visible: player
+  visible: player !== undefined
 
   CText {
-    text: `Playing: ${player !== null ? player?.trackTitle : ''}`
+    text: `Playing - ${player !== null ? player?.trackTitle : ''}`
   }
 
   CText {
-    text: "󰅁"
+    text: "<"
 
     MouseArea {
       anchors.fill: parent
@@ -50,7 +50,7 @@ RowLayout {
   }
 
   CText {
-    text: "󰅂"
+    text: ">"
 
     MouseArea {
       anchors.fill: parent
