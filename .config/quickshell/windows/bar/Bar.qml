@@ -31,7 +31,8 @@ Scope {
         color: Colors.bg
       }
 
-      Left {}
+      Left { screen: modelData }
+      Center {}
       Right {}
     }
   }

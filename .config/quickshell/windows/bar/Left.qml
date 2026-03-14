@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
 
@@ -8,6 +9,8 @@ import "../../common"
 import "../../common/widgets"
 
 RowLayout {
+  required property ShellScreen screen
+
   anchors.left: parent.left
   anchors.top: parent.top
   anchors.bottom: parent.bottom
@@ -16,18 +19,24 @@ RowLayout {
   // Workspaces.
   RowLayout {
     id: workspaces
+    implicitWidth: parent.width
+    implicitHeight: parent.height
 
     Repeater {
-      model: 5
+      model: Hyprland.workspaces.values
+        .filter(w => w.monitor.name === screen.name && w.id !== -99)
+        .slice(0, 5)
 
       Item {
         id: workspace
-        property bool isActive: (Hyprland.focusedWorkspace?.id ?? -1) == index + 1
+
+        required property HyprlandWorkspace modelData
+        required property int index
+
+        property bool isActive: modelData.focused
 
         implicitWidth: 16
-        implicitHeight: 24
-        Layout.topMargin: 4
-        Layout.bottomMargin: 4
+        implicitHeight: workspaces.height
 
         Rectangle {
           anchors.fill: parent
