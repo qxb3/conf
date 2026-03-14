@@ -13,7 +13,6 @@ option.sidescrolloff = 12
 option.scrolloff = 12
 option.completeopt = 'menuone,noinsert,noselect'
 option.shell = '/bin/zsh'
-option.laststatus = 1
 
 ------------------------------------------------------------
 -- UI                                                     --
@@ -46,6 +45,13 @@ option.synmaxcol = 240
 option.updatetime = 4000
 
 ------------------------------------------------------------
+-- Colorscheme                                            --
+------------------------------------------------------------
+
+vim.cmd('colorscheme base16-black-metal-gorgoroth')
+vim.api.nvim_set_hl(0, 'WinSeparator', { bg = 'None', fg = '#000000' })
+
+------------------------------------------------------------
 -- Vim Remaps                                             --
 ------------------------------------------------------------
 
@@ -66,12 +72,10 @@ vim.keymap.set('n', '<S-L>', ':vertical resize -3<CR>', { silent = true })
 vim.keymap.set('n', '<S-K>', ':resize -2<CR>', { silent = true })
 vim.keymap.set('n', '<S-J>', ':resize +2<CR>', { silent = true })
 
-vim.keymap.set('n', '<leader>so', ':source %<CR>')              -- Source nvim config
-vim.keymap.set('n', '<leader>nh', ':nohl<CR>')                  -- Removes highlights
-vim.keymap.set('v', '<leader>y', '"+y')                         -- Copy from pc's native clipboard
-vim.keymap.set("n", "<C-x>", "<cmd>bd<CR>", { silent = true })  -- Closes the current buffer
+vim.keymap.set('n', '<leader>so', ':source %<CR>')
+vim.keymap.set('n', '<leader>nh', ':nohl<CR>')
+vim.keymap.set('v', '<leader>y', '"+y')
 
--- Disables the recording of macros. (I don't know how to use it)
 vim.keymap.set('n', 'q', '<Nop>', { silent = true })
 vim.keymap.set('n', 'Q', '<Nop>', { silent = true })
 vim.keymap.set('n', '@', '<Nop>', { silent = true })

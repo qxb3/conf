@@ -17,8 +17,11 @@ custom_paths=(
   "$HOME/.config/cava"
   "$HOME/Downloads"
   "$HOME/Documents"
+  "$HOME/Documents/business/direct"
   "$HOME/Pictures"
   "$HOME/Videos"
+  "/games"
+  "$HOME/suno"
 )
 
 paths="$project_paths\n"

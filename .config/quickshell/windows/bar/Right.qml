@@ -16,7 +16,7 @@ RowLayout {
 
     Process {
       id: timeProc
-      command: ["date", "+%b %d, %Y - %I : %M %p"]
+      command: ["date", "+%b %d, %Y %a - %I : %M %p"]
       running: true
       stdout: SplitParser {
         onRead: data => timeText.text = data
