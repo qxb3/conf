@@ -3,7 +3,7 @@
 function close_special_workspace() {
   special_open=`hyprctl monitors -j | jq ".[0].specialWorkspace.name" | grep "special"`
   if [ ! -z $special_open ]; then
-    hyprctl dispatch togglespecialworkspace
+    hyprctl dispatch 'hl.dsp.workspace.toggle_special()'
   fi
 }
 
