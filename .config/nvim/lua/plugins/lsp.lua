@@ -74,6 +74,6 @@ return {
   dependencies = {
     'mason-org/mason-lspconfig.nvim',
     'mason-org/mason.nvim',
-    { 'saghen/blink.cmp', build = 'cargo build --release' },
+    { 'saghen/blink.cmp', version = '1.*', build = 'cargo build --release' },
   },
 }

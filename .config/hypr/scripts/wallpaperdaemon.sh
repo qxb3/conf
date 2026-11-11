@@ -1,6 +1,6 @@
 #!/bin/bash
 
-swww query
+awww query
 if [ $? -eq 1 ]; then
-  swww-daemon --format xrgb
+  awww-daemon --format xrgb
 fi

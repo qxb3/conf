@@ -53,7 +53,7 @@ RowLayout {
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
 
-            onPressed: () => Hyprland.dispatch(`workspace ${index + 1}`)
+            onPressed: () => modelData.activate()
           }
         }
       }

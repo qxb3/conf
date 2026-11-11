@@ -4,9 +4,9 @@ return {
 
   opts = {
     mappings = {
-      add = 'ca',
       replace = 'cs',
 
+      add = '',
       delete = '',
       find = '',
       find_left = '',

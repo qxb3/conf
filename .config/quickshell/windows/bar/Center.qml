@@ -17,7 +17,13 @@ RowLayout {
   visible: player !== undefined
 
   CText {
-    text: `Playing - ${player !== null ? player?.trackTitle : ''}`
+    text: `Playing - ${
+      player !== null
+        ? player?.trackTitle.length > 32
+            ? player?.trackTitle.slice(0, 32 - 3) + "..."
+            : player?.trackTitle
+        : ''
+    }`
   }
 
   CText {

@@ -16,7 +16,8 @@ return {
         file_ignore_patterns = {
           'node_modules', 'dist', 'static',
           'packer_compiled.lua', 'nvim-tree.lua',
-          'target', 'CMakeFiles', '@girs'
+          'target', 'CMakeFiles', '@girs', 'build', 'vendor',
+          'game_files'
         },
         mappings = {
           n = {
