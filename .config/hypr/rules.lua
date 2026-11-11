@@ -10,6 +10,7 @@ hl.window_rule({ match = { class = "^(nm-applet)$" },               float = true
 hl.window_rule({ match = { class = "^(nm-connection-editor)$" },    float = true })
 hl.window_rule({ match = { class = "^(com.obsproject.Studio)$" },   float = true })
 hl.window_rule({ match = { class = ".*Mirage Realms.*" },           render_unfocused = true })
+hl.window_rule({ name = "suppress-maximize-events", match = { class = ".*" }, suppress_event = "maximize", })
 
 -- ╻ ╻┏━┓┏━┓╻┏ ┏━┓┏━┓┏━┓┏━╸┏━╸   ┏━┓╻ ╻╻  ┏━╸┏━┓
 -- ┃╻┃┃ ┃┣┳┛┣┻┓┗━┓┣━┛┣━┫┃  ┣╸    ┣┳┛┃ ┃┃  ┣╸ ┗━┓
