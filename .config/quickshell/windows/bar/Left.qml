@@ -45,7 +45,7 @@ RowLayout {
           CText {
             anchors.centerIn: parent
             color: workspace.isActive ? Colors.bg : Colors.fg
-            text: modelData.id
+            text: index + 1
           }
 
           MouseArea {
