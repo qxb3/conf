@@ -104,7 +104,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Special workspace
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special())
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special", follow = false })) -- was movetoworkspacesilent
+hl.bind(mainMod .. " + X", hl.dsp.window.move({ workspace = "special", follow = false })) -- was movetoworkspacesilent
 
 -- Move window silently to workspace Super + Alt + [0-9]
 for i = 1, 5 do
