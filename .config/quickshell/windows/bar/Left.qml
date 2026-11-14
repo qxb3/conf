@@ -24,7 +24,7 @@ RowLayout {
 
     Repeater {
       model: Hyprland.workspaces.values
-        .filter(w => w.monitor.name === screen.name && w.id !== -99)
+        .filter(w => w.monitor.name === screen.name && w.id !== -1)
         .slice(0, 5)
 
       Item {
@@ -45,7 +45,7 @@ RowLayout {
           CText {
             anchors.centerIn: parent
             color: workspace.isActive ? Colors.bg : Colors.fg
-            text: index + 1
+            text: modelData.id
           }
 
           MouseArea {
