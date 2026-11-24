@@ -1,7 +1,6 @@
 {
   "base16-black-metal-scheme": { "branch": "master", "commit": "c7a32bec8105a1ceddb9fcc90b713dabde5e7e5e" },
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
-  "cord.nvim": { "branch": "master", "commit": "85f295e43550bc968b66d95d8bfd6e12bb17df08" },
   "fidget.nvim": { "branch": "main", "commit": "6f793b2bcd2d35e201c09520f698bb763220908a" },
   "indent-blankline.nvim": { "branch": "master", "commit": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03" },
   "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },

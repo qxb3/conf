@@ -1,3 +1,0 @@
-return {
-  'vyfor/cord.nvim'
-}
