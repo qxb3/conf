@@ -1,6 +1,7 @@
 -- Improves startup, ig?
 vim.loader.enable()
 
-require('core/opts')
-require('core/autocmds')
-require('plugins')
+require('core.lazy.bootstrap')
+require('core.opts')
+require('core.autocmds')
+require('core.lazy.setup')
