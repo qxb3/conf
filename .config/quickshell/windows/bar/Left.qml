@@ -68,6 +68,7 @@ RowLayout {
       target: Hyprland
 
       function onRawEvent(event) {
+        activeWindowProc.running = false
         activeWindowProc.running = true
       }
     }
@@ -78,12 +79,13 @@ RowLayout {
       command: ["hyprctl", "-j", "activewindow"]
       running: true
 
-      stdout: SplitParser {
-        onRead: data => {
-          const match = data.match(/"initialClass":\s*"([^"]+)"/)
-          if (match)
-            activeWindowText.text = `* ${match[1]}`
-        }
+      stdout: StdioCollector {
+        id: activeWindowOutput
+      }
+
+      onExited: {
+        const match = activeWindowOutput.text.match(/"initialClass":\s*"([^"]+)"/)
+        activeWindowText.text = match ? `* ${match[1]}` : "* none"
       }
     }
   }

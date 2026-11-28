@@ -1,7 +1,8 @@
-function fuzz(query, list, keys) {
+function fuzz(query, list, keys, usage) {
   const q = query.toLowerCase()
+  const uses = item => (usage ? usage(item) : 0)
   if (!q.length)
-    return list
+    return [...list].sort((a, b) => uses(b) - uses(a))
 
   const keyList = Array.isArray(keys) ? keys : [keys]
 
@@ -39,6 +40,6 @@ function fuzz(query, list, keys) {
       return matched ? { item, score: bestScore } : null
     })
     .filter(Boolean)
-    .sort((a, b) => a.score - b.score)
+    .sort((a, b) => a.score - b.score || uses(b.item) - uses(a.item))
     .map(x => x.item)
 }

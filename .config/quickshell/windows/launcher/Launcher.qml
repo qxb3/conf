@@ -15,6 +15,32 @@ Scope {
   id: root
 
   property bool isOpen: false
+  property string openMonitor: ""
+
+  FileView {
+    id: usageFile
+    path: Quickshell.env("HOME") + "/.local/state/quickshell/launcher-usage.json"
+    watchChanges: true
+    atomicWrites: true
+    onFileChanged: reload()
+
+    JsonAdapter {
+      id: usageData
+      property var counts: ({})
+    }
+  }
+
+  Process {
+    id: mkdirUsage
+    command: ["mkdir", "-p", Quickshell.env("HOME") + "/.local/state/quickshell"]
+    onExited: usageFile.writeAdapter()
+  }
+
+  readonly property var launchableApps: DesktopEntries.applications.values.filter(e => !e.noDisplay && !e.hidden && !e.terminal)
+
+  function usageOf(entry) {
+    return usageData.counts[entry.id] ?? 0
+  }
 
   Variants {
     model: Quickshell.screens
@@ -29,7 +55,7 @@ Scope {
       exclusionMode: ExclusionMode.Normal
       focusable: true
       aboveWindows: true
-      visible: root.isOpen
+      visible: root.isOpen && modelData.name === root.openMonitor
 
       implicitWidth: 400
       implicitHeight: 300
@@ -54,12 +80,14 @@ Scope {
           ListView {
             id: appList
             anchors.fill: parent
+            clip: true
 
             model: DelegateModel {
               model: Fuzzy.fuzz(
                 searchInput.text,
-                DesktopEntries.applications.values,
-                ["name", "id", "genericName", "comment"]
+                root.launchableApps,
+                ["name", "id", "genericName", "comment"],
+                root.usageOf
               )
 
               delegate: Rectangle {
@@ -103,9 +131,31 @@ Scope {
           color: Colors.fg
           font.pixelSize: 16
 
+          Keys.onDownPressed: {
+            if (apps.selectedIndex < appList.count - 1) apps.selectedIndex++
+            appList.positionViewAtIndex(apps.selectedIndex, ListView.Contain)
+          }
+
+          Keys.onTabPressed: (event) => {
+            if (apps.selectedIndex < appList.count - 1) apps.selectedIndex++
+            appList.positionViewAtIndex(apps.selectedIndex, ListView.Contain)
+            event.accepted = true
+          }
+
+          Keys.onUpPressed: {
+            if (apps.selectedIndex > 0) apps.selectedIndex--
+            appList.positionViewAtIndex(apps.selectedIndex, ListView.Contain)
+          }
+
           onAccepted: {
             root.isOpen = false
             searchInput.text = ""
+
+            const id = apps.selectedApp.id
+            const counts = Object.assign({}, usageData.counts)
+            counts[id] = (counts[id] ?? 0) + 1
+            usageData.counts = counts
+            mkdirUsage.running = true
 
             apps.selectedApp.execute()
           }
@@ -115,6 +165,7 @@ Scope {
           target: "launcher"
 
           function toggle(): void {
+            root.openMonitor = Hyprland.focusedMonitor?.name ?? root.openMonitor
             root.isOpen = !root.isOpen
 
             if (!root.isOpen) {
@@ -127,9 +178,10 @@ Scope {
         GlobalShortcut {
           name: "launcher_tab_down"
           onPressed: {
-            if (!root.isOpen) return
+            if (!root.isOpen || apps.selectedIndex >= appList.count - 1) return
 
             apps.selectedIndex++
+            appList.positionViewAtIndex(apps.selectedIndex, ListView.Contain)
           }
         }
 
@@ -139,6 +191,7 @@ Scope {
             if (!root.isOpen || apps.selectedIndex <= 0) return
 
             apps.selectedIndex--
+            appList.positionViewAtIndex(apps.selectedIndex, ListView.Contain)
           }
         }
       }
