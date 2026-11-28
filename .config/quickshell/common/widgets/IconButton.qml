@@ -14,14 +14,15 @@ Rectangle {
   property int buttonSize: 32
   property int iconSize: 22
   property bool filled: false
+  property bool highlighted: false
 
   signal clicked()
 
   implicitWidth: root.buttonSize
   implicitHeight: root.buttonSize
-  color: root.filled ? Colors.primary : "transparent"
-  border.width: mouse.containsMouse ? 1 : 0
-  border.color: Qt.rgba(1, 1, 1, 0.15)
+  color: root.filled ? Colors.primary : (root.highlighted ? Colors.surface2 : "transparent")
+  border.width: (mouse.containsMouse || root.highlighted) ? 1 : 0
+  border.color: root.highlighted ? Colors.muted : Qt.rgba(1, 1, 1, 0.15)
 
   Behavior on color {
     ColorAnimation { duration: 220; easing.type: Easing.OutCubic }

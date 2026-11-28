@@ -13,7 +13,8 @@ import "./fuzzy.js" as Fuzzy
 Item {
   id: root
 
-  readonly property bool shown: BarState.expanded && BarState.tab === 1
+  property string screenName: ""
+  readonly property bool shown: BarState.isOn(screenName, 1)
 
   onShownChanged: if (shown) searchInput.forceActiveFocus()
   readonly property var launchableApps: DesktopEntries.applications.values.filter(e => !e.noDisplay && !e.hidden && !e.terminal)

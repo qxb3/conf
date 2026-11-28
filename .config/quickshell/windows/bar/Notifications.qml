@@ -100,7 +100,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: 14
         color: Colors.dim
-        text: "No Notifications :("
+        text: DndState.active ? "DnD is Active" : "No Notifications :("
       }
     }
   }

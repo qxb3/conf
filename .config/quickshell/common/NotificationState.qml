@@ -24,6 +24,33 @@ Singleton {
   property var copyQueue: []
   property var copying: null
 
+  // Notifications that arrive during Do Not Disturb are held here and shown when DnD turns off.
+  property var dndQueue: []
+
+  function addEntry(e) {
+    // Spotify track changes reuse one entry: the new one replaces the old by id.
+    const existing = e.appName === "Spotify" ? entries.find(x => x.appName === "Spotify") : null
+    if (existing) e.id = existing.id
+    entries = entries.filter(x => x.id !== e.id).concat([e])
+    popups = [e].concat(popups.filter(p => p.id !== e.id))
+    queueCopy(e)
+    save()
+  }
+
+  function flushDnd() {
+    const held = dndQueue
+    dndQueue = []
+    held.forEach(e => addEntry(e))
+  }
+
+  Connections {
+    target: DndState
+
+    function onActiveChanged() {
+      if (!DndState.active) root.flushDnd()
+    }
+  }
+
   function hidePopup(e) {
     popups = popups.filter(p => p !== e)
   }
@@ -139,10 +166,9 @@ Singleton {
         image: notification.image,
         time: Date.now()
       }
-      root.entries = root.entries.concat([e])
-      root.popups = [e].concat(root.popups)
-      root.queueCopy(e)
-      root.save()
+      // While DnD is on, the notification is held back instead of reaching popups or the sidebar.
+      if (DndState.active) root.dndQueue = root.dndQueue.concat([e])
+      else root.addEntry(e)
     }
   }
 }

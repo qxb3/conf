@@ -16,6 +16,10 @@ RowLayout {
   // Wired wins whenever a wired device is connected, even if wifi is also up.
   readonly property bool wired: Networking.devices.values.some(d => d.connected && d.type === DeviceType.Wired)
 
+  // Name of the connected device, wired first, shown under the network icon.
+  readonly property var activeDevice: Networking.devices.values.find(d => d.connected && d.type === DeviceType.Wired) ?? Networking.devices.values.find(d => d.connected)
+  readonly property string activeName: activeDevice ? activeDevice.name : "OFFLINE"
+
   readonly property var sink: Pipewire.defaultAudioSink
   readonly property bool btOn: Bluetooth.defaultAdapter?.enabled ?? false
   readonly property bool muted: sink?.audio?.muted ?? false
@@ -39,13 +43,17 @@ RowLayout {
       anchors.horizontalCenter: parent.horizontalCenter
       spacing: 6
 
-      IconButton {
+      Item {
         Layout.alignment: Qt.AlignHCenter
-        animated: true
-        buttonSize: 86
-        iconSize: 65
-        flat: true
-        icon: root.wired ? "wired" : "wifi"
+        implicitWidth: 86
+        implicitHeight: 86
+
+        Icon {
+          anchors.centerIn: parent
+          iconName: root.wired ? "wired" : "wifi"
+          size: 65
+          color: Colors.fg
+        }
       }
 
       CText {
@@ -53,7 +61,7 @@ RowLayout {
         font.pixelSize: 12
         font.letterSpacing: 2
         color: Colors.dim
-        text: root.wired ? "WIRED" : "WIFI"
+        text: root.activeName.toUpperCase()
       }
     }
   }

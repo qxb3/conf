@@ -13,6 +13,7 @@ Item {
   readonly property var sink: Pipewire.defaultAudioSink
   readonly property var player: Mpris.players.values.filter(p => p.identity.toLowerCase() === "spotify")[0]
   property real musicLastVolume: 0.5
+  property string screenName: ""
 
   PwObjectTracker {
     objects: [root.sink]
@@ -111,6 +112,7 @@ Item {
 
     // Page 1: app launcher.
     AppLauncher {
+      screenName: root.screenName
       width: stage.width
       height: stage.height
       x: (1 - BarState.tab) * stage.width

@@ -31,6 +31,17 @@ Item {
     onTriggered: root.player?.positionChanged()
   }
 
+  // Sends a notify-send on every Spotify track change. It goes through our own server, so it shows as a popup and in the sidebar.
+  Connections {
+    target: root.player
+    ignoreUnknownSignals: true
+
+    function onPostTrackChanged() {
+      if (!root.player || !root.player.trackTitle) return
+      Quickshell.execDetached(["sh", "-c", "f=\"$HOME/.cache/quickshell/spotify-art.jpg\"; mkdir -p \"$(dirname \"$f\")\"; if [ -n \"$1\" ] && curl -sfL \"$1\" -o \"$f\"; then notify-send -a Spotify -i \"$f\" \"$2\" \"$3\"; else notify-send -a Spotify \"$2\" \"$3\"; fi", "sh", root.player.trackArtUrl, root.player.trackTitle, root.player.trackArtist])
+    }
+  }
+
   function fmt(s) {
     const t = Math.floor(s)
     return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0")

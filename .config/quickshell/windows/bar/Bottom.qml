@@ -11,6 +11,7 @@ ColumnLayout {
   id: root
 
   property var player: Mpris.players.values.filter(p => p.identity.toLowerCase() === "spotify")[0]
+  property string screenName: ""
 
   anchors.bottom: parent.bottom
   anchors.horizontalCenter: parent.horizontalCenter
@@ -30,20 +31,26 @@ ColumnLayout {
       anchors.centerIn: parent
       spacing: 6
 
-      // Media: toggles play / pause, lit while playing.
       IconButton {
+        id: mediaButton
+
         flat: true
         animated: true
         Layout.alignment: Qt.AlignHCenter
         icon: "headphones"
+        highlighted: VolumeState.isOn(root.screenName)
+        onClicked: {
+          if (VolumeState.isOn(root.screenName)) VolumeState.open = false
+          else VolumeState.show(mediaButton.mapToItem(null, 0, mediaButton.height).y, root.screenName)
+        }
       }
 
       IconButton {
         flat: true
         animated: true
         Layout.alignment: Qt.AlignHCenter
-        icon: "sliders"
-        onClicked: Quickshell.execDetached(["pavucontrol"])
+        icon: "color-picker"
+        onClicked: Quickshell.execDetached(["hyprpicker", "-a"])
       }
 
       IconButton {
@@ -51,7 +58,7 @@ ColumnLayout {
         animated: true
         Layout.alignment: Qt.AlignHCenter
         icon: "aperture"
-        onClicked: Quickshell.execDetached(["sh", "-c", "grim -g \"$(slurp)\" - | wl-copy"])
+        onClicked: Quickshell.execDetached(["sh", "-c", "~/.config/hypr/scripts/screenshot.sh s"])
       }
     }
   }
@@ -63,9 +70,9 @@ ColumnLayout {
     Layout.alignment: Qt.AlignHCenter
     implicitWidth: 40
     implicitHeight: clockColumn.implicitHeight + 16
-    color: (CalendarState.open || clockMouse.containsMouse) ? Colors.surface2 : "transparent"
+    color: (CalendarState.isOn(root.screenName) || clockMouse.containsMouse) ? Colors.surface2 : "transparent"
     border.width: 1
-    border.color: (CalendarState.open || clockMouse.containsMouse) ? Colors.muted : Qt.rgba(1, 1, 1, 0.15)
+    border.color: (CalendarState.isOn(root.screenName) || clockMouse.containsMouse) ? Colors.muted : Qt.rgba(1, 1, 1, 0.15)
 
     Behavior on color {
       ColorAnimation { duration: 220; easing.type: Easing.OutCubic }
@@ -80,7 +87,7 @@ ColumnLayout {
       anchors.fill: parent
       cursorShape: Qt.PointingHandCursor
       hoverEnabled: true
-      onPressed: CalendarState.open = !CalendarState.open
+      onPressed: CalendarState.toggle(root.screenName)
     }
 
     SystemClock {

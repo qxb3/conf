@@ -6,6 +6,10 @@ import "../../common/widgets"
 Item {
   id: root
 
+  property string screenName: ""
+  readonly property bool isOpen: CalendarState.isOn(screenName)
+  property bool shown: false
+
   property date viewDate: new Date()
   readonly property int offset: new Date(viewDate.getFullYear(), viewDate.getMonth(), 1).getDay()
   readonly property int dim: new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, 0).getDate()
@@ -23,18 +27,14 @@ Item {
   width: 272
   height: panel.height
   clip: true
-  visible: CalendarState.shown
+  visible: shown
 
-  Connections {
-    target: CalendarState
-
-    function onOpenChanged() {
-      if (CalendarState.open) {
-        root.viewDate = new Date()
-        CalendarState.shown = true
-      } else {
-        closeTimer.restart()
-      }
+  onIsOpenChanged: {
+    if (isOpen) {
+      viewDate = new Date()
+      shown = true
+    } else {
+      closeTimer.restart()
     }
   }
 
@@ -42,7 +42,7 @@ Item {
     id: closeTimer
 
     interval: 280
-    onTriggered: CalendarState.shown = false
+    onTriggered: root.shown = false
   }
 
   Rectangle {
@@ -50,7 +50,7 @@ Item {
 
     width: root.width
     height: content.height + 32
-    x: CalendarState.open ? 0 : -width
+    x: root.isOpen ? 0 : -width
     color: Colors.bg
     border.width: 1
     border.color: Colors.border

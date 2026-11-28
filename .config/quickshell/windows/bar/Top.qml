@@ -8,7 +8,7 @@ import "../../common"
 import "../../common/widgets"
 
 ColumnLayout {
-  id: top
+  id: topBox
 
   anchors.top: parent.top
   anchors.horizontalCenter: parent.horizontalCenter
@@ -16,6 +16,7 @@ ColumnLayout {
   spacing: 6
 
   property bool trayOpen: false
+  property string screenName: ""
 
   onTrayOpenChanged: trayOpen ? autoClose.restart() : autoClose.stop()
 
@@ -23,7 +24,7 @@ ColumnLayout {
     id: autoClose
 
     interval: 15000
-    onTriggered: top.trayOpen = false
+    onTriggered: topBox.trayOpen = false
   }
 
   // Avatar.
@@ -56,7 +57,7 @@ ColumnLayout {
       anchors.fill: parent
       cursorShape: Qt.PointingHandCursor
       hoverEnabled: true
-      onPressed: BarState.expanded = !BarState.expanded
+      onPressed: BarState.toggle(topBox.screenName)
     }
   }
 
@@ -78,18 +79,18 @@ ColumnLayout {
     animated: true
     Layout.alignment: Qt.AlignHCenter
     icon: "search"
-    active: BarState.expanded && BarState.tab === 1
+    active: BarState.isOn(topBox.screenName, 1)
     filled: active
-    onClicked: active ? BarState.open(0) : BarState.open(1)
+    onClicked: active ? BarState.open(0, topBox.screenName) : BarState.open(1, topBox.screenName)
   }
 
   IconButton {
     animated: true
     Layout.alignment: Qt.AlignHCenter
     icon: "image"
-    active: BarState.expanded && BarState.tab === 2
+    active: BarState.isOn(topBox.screenName, 2)
     filled: active
-    onClicked: active ? BarState.open(0) : BarState.open(2)
+    onClicked: active ? BarState.open(0, topBox.screenName) : BarState.open(2, topBox.screenName)
   }
 
   // Separator between the palette icon and the tray.
@@ -113,7 +114,7 @@ ColumnLayout {
     Layout.alignment: Qt.AlignHCenter
     Layout.preferredWidth: 32
     implicitWidth: 32
-    implicitHeight: top.trayOpen ? trayColumn.implicitHeight : 0
+    implicitHeight: topBox.trayOpen ? trayColumn.implicitHeight : 0
     clip: true
     visible: height > 0
 
@@ -154,10 +155,18 @@ ColumnLayout {
           MouseArea {
             id: trayMouse
             anchors.fill: parent
+            acceptedButtons: Qt.LeftButton | Qt.RightButton
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
 
-            onPressed: modelData.activate()
+            onPressed: mouse => {
+              if (mouse.button === Qt.RightButton && modelData.hasMenu) {
+                const p = trayMouse.mapToItem(null, trayMouse.width, mouse.y)
+                TrayMenuState.show(modelData, p.x, p.y, topBox.screenName)
+              } else {
+                modelData.activate()
+              }
+            }
           }
         }
       }
@@ -169,8 +178,8 @@ ColumnLayout {
     Layout.topMargin: -6
     flat: true
     icon: "chevron-down"
-    iconRotation: top.trayOpen ? 180 : 0
+    iconRotation: topBox.trayOpen ? 180 : 0
     iconColor: Colors.dim
-    onClicked: top.trayOpen = !top.trayOpen
+    onClicked: if (!TrayMenuState.open) topBox.trayOpen = !topBox.trayOpen
   }
 }

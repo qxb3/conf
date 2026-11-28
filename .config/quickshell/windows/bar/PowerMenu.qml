@@ -10,6 +10,7 @@ Rectangle {
   id: root
 
   readonly property int menuWidth: 200
+  readonly property int slideDistance: 16
 
   width: menuWidth
   height: content.implicitHeight + 32
@@ -19,6 +20,22 @@ Rectangle {
   border.width: 1
   border.color: Colors.border
   focus: PowerState.open
+  clip: true
+  opacity: PowerState.open ? 1 : 0
+
+  transform: Translate {
+    id: slideShift
+
+    y: PowerState.open ? 0 : -root.slideDistance
+
+    Behavior on y {
+      NumberAnimation { duration: 260; easing.type: Easing.BezierSpline; easing.bezierCurve: [0.2, 0.8, 0.3, 1, 1, 1] }
+    }
+  }
+
+  Behavior on opacity {
+    NumberAnimation { duration: 260; easing.type: Easing.BezierSpline; easing.bezierCurve: [0.2, 0.8, 0.3, 1, 1, 1] }
+  }
 
   Keys.onEscapePressed: PowerState.open = false
 
