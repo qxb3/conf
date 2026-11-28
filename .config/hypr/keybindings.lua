@@ -16,10 +16,9 @@ hl.bind("ALT + Return", hl.dsp.window.fullscreen({ mode = "fullscreen", action =
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("swaylock"))
 
 -- Ags keybinds
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call launcher toggle"))
-hl.bind(mainMod .. " + Tab", hl.dsp.global("quickshell:launcher_tab_down"))
-hl.bind(mainMod .. " + down", hl.dsp.global("quickshell:launcher_tab_down"))
-hl.bind(mainMod .. " + up", hl.dsp.global("quickshell:launcher_tab_up"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("quickshell ipc call bar launcher"))
+hl.bind(mainMod .. " + Tab", hl.dsp.exec_cmd("quickshell ipc call bar toggle"))
+
 
 -- Application shortcuts
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty"))
